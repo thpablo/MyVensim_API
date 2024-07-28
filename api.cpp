@@ -1,80 +1,7 @@
-#define QUANT_SISTEMAS 5
 #include <iostream>
 #include <string>
 #include <vector>
 using namespace std;
-
-class Modelo{
-    vector<Fluxo> fluxos;
-    vector<Sistema> sistemas;
-
-    string nome;
-    int tempoInicial;
-    int tempoFinal; 
-
-public:
-    // Construtores
-    Modelo(){
-        nome = "";
-        tempoInicial = 0;
-        tempoFinal = 0;
-    }
-    Modelo(string nome){
-        this->nome = nome;
-        tempoInicial = 0;
-        tempoFinal = 0;
-    }
-    Modelo(string nome, int tempoInicial){
-        this->nome = nome;
-        this->tempoInicial = tempoInicial;
-        tempoFinal = 0;
-    }
-    Modelo(string nome, int tempoInicial, int tempoFinal){
-        this->nome = nome;
-        this->tempoInicial = tempoInicial;
-        this->tempoFinal = tempoFinal;
-    }
-
-    void setNome(const string& nome) {
-        this->nome = nome;
-    }
-
-    void adicionarSistema(Sistema& sistema) {
-        sistemas.push_back(sistema);
-    }
-    void adicionarFluxo(Fluxo& fluxo) {
-        fluxos.push_back(fluxo);
-    }
-    void run(){
-        int n = fluxos.size();
-        int valoresAcumuladosFluxos[n];
-    
-        for(int i = tempoInicial; i < tempoFinal; i++){
-            
-            // Acumula valores para atualizar os sistemas
-            for(vector<Fluxo>::iterator it = fluxos.begin(); it != fluxos.end(); ++it)
-                valoresAcumuladosFluxos[i] = fluxos[i].execute();
-            
-            // Atualiza os sistemas
-            for(vector<Fluxo>::iterator it = fluxos.begin(); it != fluxos.end(); ++it){
-                Sistema* entrada = fluxos[i].getSistemaEntrada();
-                Sistema* saida = fluxos[i].getSistemaSaida();
-                
-                entrada->setValorAcumulador(entrada->getValorAcumulador() - valoresAcumuladosFluxos[i]);
-                saida->setValorAcumulador(saida->getValorAcumulador() + valoresAcumuladosFluxos[i]);
-            }
-             // Printa os valores dos sistemas
-            for(vector<Sistema>::iterator it = sistemas.begin(); it != sistemas.end(); ++it)
-                cout << "Tempo: " << i << "Sistema: " << sistemas[i].getNome() << " Valor: " << sistemas[i].getValorAcumulador() << endl;
-        }
-    }
-
-    void printarSistemas(){
-        for(vector<Sistema>::iterator it = sistemas.begin(); it != sistemas.end(); ++it)
-            cout << it->getNome() << " " << it->getValorAcumulador() << endl;
-    }
-
-};
 
 class Sistema
 {
@@ -84,34 +11,31 @@ private:
 
 public:
     // Sem nome
-    Sistema(){
-        nome = "";
-        valorAcumulador = 0.0;
-    }
+    Sistema() : nome(""), valorAcumulador(0.0) {}
+
     // Somente nome
-    Sistema(string nome){
-        this->nome = nome;
-        valorAcumulador = 0.0;
-    }
-    // Nome e valor 
-    Sistema(string nome, double valorAcumulador){
-        this->nome = nome;
-        this->valorAcumulador = valorAcumulador;
-    }
+    Sistema(string nome) : nome(nome), valorAcumulador(0.0) {}
 
-    void setNome(const string& nome) {
+    // Nome e valor
+    Sistema(string nome, double valor) : nome(nome), valorAcumulador(valor) {}
+
+    void setNome(const string &nome)
+    {
         this->nome = nome;
     }
 
-    string getNome() const {
+    string getNome() const
+    {
         return nome;
     }
 
-    void setValorAcumulador(long double valor) {
+    void setValorAcumulador(long double valor)
+    {
         valorAcumulador = valor;
     }
 
-    long double getValorAcumulador() const {
+    long double getValorAcumulador() const
+    {
         return valorAcumulador;
     }
 };
@@ -120,76 +44,147 @@ public:
 class Fluxo
 {
 private:
-    Sistema* entrada;
-    Sistema* saida;
+    Sistema *entrada;
+    Sistema *saida;
     double valorTransporte;
 
 public:
     virtual double execute() = 0;
+    Fluxo() : entrada(nullptr), saida(nullptr), valorTransporte(0.0) {}
+    Fluxo(Sistema *entrada, Sistema *saida) : entrada(entrada), saida(saida), valorTransporte(0.0) {}
 
-    // setados entrada e saida nulos
-    Fluxo(){
-        entrada = nullptr;
-        saida = nullptr; 
-        valorTransporte = 0.0;
+    void setSistemaEntrada(Sistema *entrada)
+    {
+        this->entrada = entrada;
     }
 
-    void conectarSistemas(Sistema& entrada, Sistema& saida) {
-        this->entrada = &entrada;
-        this->saida = &saida;
+    void setSistemaSaida(Sistema *saida)
+    {
+        this->saida = saida;
     }
 
-    void setSistemaEntrada(Sistema& entrada) {
-        this->entrada = &entrada;
-    }
-
-    void setSistemaSaida(Sistema& saida) {
-        this->saida = &saida;
-    }
-
-    Sistema* getSistemaEntrada() const {
+    Sistema *getSistemaEntrada() const
+    {
         return entrada;
     }
 
-    Sistema* getSistemaSaida() const {
+    Sistema *getSistemaSaida() const
+    {
         return saida;
     }
 
-    void setValorTransporte(double valor) {
+    void setValorTransporte(double valor)
+    {
         valorTransporte = valor;
     }
 
-    double getValorTransporte() const {
+    double getValorTransporte() const
+    {
         return valorTransporte;
     }
 };
 
-class Exponencial : public Fluxo {
+
+class Modelo
+{
+    vector<Fluxo *> fluxos;
+    vector<Sistema *> sistemas;
+
+    string nome;
+    int tempoInicial;
+    int tempoFinal;
+
 public:
-    double execute() override {
-        return 0.3 * getSistemaEntrada()->getValorAcumulador();
+    // Construtores
+    Modelo() : nome(""), tempoInicial(0), tempoFinal(0) {}
+    Modelo(string nome) : nome(nome), tempoInicial(0), tempoFinal(0) {}
+    Modelo(string nome, int tempoInicial) : nome(nome), tempoInicial(tempoInicial), tempoFinal(0) {}
+    Modelo(string nome, int tempoInicial, int tempoFinal) : nome(nome), tempoInicial(tempoInicial), tempoFinal(tempoFinal) {}
+
+    void setNome(const string &nome)
+    {
+        this->nome = nome;
+    }
+    void adicionarSistema(Sistema *sistema)
+    {
+        sistemas.push_back(sistema);
+    }
+    void adicionarFluxo(Fluxo *fluxo)
+    {
+        fluxos.push_back(fluxo);
+    }
+
+    void run(bool printar = false)
+    {
+        for (int i = tempoInicial; i <= tempoFinal; i++)
+        {
+            printar ? printarSistemas(i) : void();
+            // Acumula valores para atualizar os sistemas
+            for (auto it = fluxos.begin(); it != fluxos.end(); ++it)
+                (*it)->setValorTransporte((*it)->execute());
+
+            // Atualiza os sistemas
+            for (auto it = fluxos.begin(); it != fluxos.end(); ++it)
+            {
+                Sistema *entrada = (*it)->getSistemaEntrada();
+                Sistema *saida = (*it)->getSistemaSaida();
+
+                entrada->setValorAcumulador(entrada->getValorAcumulador() - (*it)->getValorTransporte());
+                saida->setValorAcumulador(saida->getValorAcumulador() + (*it)->getValorTransporte());
+            }
+        }
+    }
+
+    void printarSistemas(int tempo)
+    {
+        cout << "Tempo: " << tempo << endl;
+        for (auto it = sistemas.begin(); it != sistemas.end(); ++it)
+            cout << "\t" << (*it)->getNome() << ":\t" << (*it)->getValorAcumulador() << endl;
+        cout << "---------------------------------" << endl;
     }
 };
 
-class Logistica : public Fluxo {
+// Implementação de polimorfismos dos fluxos
+class Exponencial : public Fluxo
+{
 public:
-    double execute() override{
-        return 0.01 * getSistemaSaida()->getValorAcumulador() * ((1 - getSistemaSaida()->getValorAcumulador())/70);
+    Exponencial(Sistema *entrada, Sistema *saida) : Fluxo(entrada, saida) {}
+    double execute() override
+    {
+        return 0.01 * getSistemaEntrada()->getValorAcumulador();
     }
 };
 
-int main(){
+class Logistica : public Fluxo
+{
+public:
+    Logistica(Sistema *entrada, Sistema *saida) : Fluxo(entrada, saida) {}
+    double execute() override
+    {
+        return 0.01 * getSistemaSaida()->getValorAcumulador() * ((1 - getSistemaSaida()->getValorAcumulador()) / 70);
+    }
+};
+
+int main()
+{
     int tempoInicial = 0;
-    int tempoFinal = 0;
+    int tempoFinal = 100;
 
     // Criação do modelo
     Modelo m = Modelo("Modelo 1", tempoInicial, tempoFinal);
 
     // Adiciona Sistemas
-    Sistema s1 = Sistema("Sistema 1", 100);
-    Sistema s2 = Sistema("Sistema 2", 0);
+    Sistema s1 = Sistema("POP 1", 100);
+    Sistema s2 = Sistema("POP 2", 0);
+
     // Adiciona Sistemas e fluxos
+    Exponencial fluxo1 = Exponencial(&s1, &s2);
+
+    // Adiciona Sistemas e fluxos ao modelo
+    m.adicionarSistema(&s1);
+    m.adicionarSistema (&s2);
+    m.adicionarFluxo(&fluxo1);
 
     // Execução
-    m.run();
+    m.run(true);
 }
