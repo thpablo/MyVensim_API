@@ -15,6 +15,17 @@ void Modelo::setNome(const string &nome) {
     this->nome = nome;
 }
 
+void Modelo::setTempoInicial(int tempoInicial) {
+    if(tempoInicial < 0 || tempoInicial >= tempoFinal)
+        throw invalid_argument("Tempo inicial deve ser maior ou igual a zero e menor que o tempo final");
+    this->tempoInicial = tempoInicial;
+}
+void Modelo::setTempoFinal(int tempoFinal) {
+    if(tempoFinal < tempoInicial)
+        throw invalid_argument("Tempo final deve ser maior que o tempo inicial");
+    this->tempoFinal = tempoFinal;
+}
+
 void Modelo::adicionarSistema(Sistema *sistema) {
     sistemas.push_back(sistema);
 }
@@ -33,21 +44,21 @@ void Modelo::run(bool printar) {
             Sistema *entrada = (*it)->getSistemaEntrada();
             Sistema *saida = (*it)->getSistemaSaida();
 
-            entrada->setValorAcumulador(entrada->getValorAcumulador() - (*it)->getValorTransporte());
-            saida->setValorAcumulador(saida->getValorAcumulador() + (*it)->getValorTransporte());
+            if(entrada != nullptr)
+                entrada->setValorAcumulador(entrada->getValorAcumulador() - (*it)->getValorTransporte());
+            if(saida != nullptr)
+                saida->setValorAcumulador(saida->getValorAcumulador() + (*it)->getValorTransporte());
         }
     }
 }
 
 void Modelo::printarSistemas(int tempo) {
-    string fluxosVet[6] = {"F", "G", "R", "T", "U", "V"};
-    int cont = 0;
     cout << "Tempo: " << tempo << endl;
-    for (auto it = fluxos.begin(); it != fluxos.end(); ++it) {
-        cout << fluxosVet[cont] << ": " << (*it)->getValorTransporte() << "    ";
-        cont++;
-    }
+    for (auto it = fluxos.begin(); it != fluxos.end(); ++it)
+        cout << (*it)->getNome() << ": " << (*it)->getValorTransporte() << "    ";
+
     cout << endl;
+
     for (auto it = sistemas.begin(); it != sistemas.end(); ++it)
         cout << "\t\t" << (*it)->getNome() << ":\t" << (*it)->getValorAcumulador() << endl;
     cout << "---------------------------------" << endl;

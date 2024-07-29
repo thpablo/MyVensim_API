@@ -6,6 +6,7 @@
 class Fluxo
 {
 private:
+    string nome;
     Sistema *entrada;
     Sistema *saida;
     double valorTransporte;
@@ -13,8 +14,10 @@ private:
 public:
     virtual double execute() = 0;
     Fluxo();
-    Fluxo(Sistema *entrada, Sistema *saida);
+    Fluxo(string nome, Sistema *entrada, Sistema *saida);
 
+    void setNome(const string &nome);
+    string getNome() const;
     void setSistemaEntrada(Sistema *entrada);
     void setSistemaSaida(Sistema *saida);
 

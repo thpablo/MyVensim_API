@@ -1,8 +1,15 @@
 #include "Fluxo.h"
 
-Fluxo::Fluxo() : entrada(nullptr), saida(nullptr), valorTransporte(0.0) {}
+Fluxo::Fluxo() : nome(""), entrada(nullptr), saida(nullptr), valorTransporte(0.0) {}
 
-Fluxo::Fluxo(Sistema *entrada, Sistema *saida) : entrada(entrada), saida(saida), valorTransporte(0.0) {}
+Fluxo::Fluxo(string nome, Sistema *entrada, Sistema *saida) : nome(nome), entrada(entrada), saida(saida), valorTransporte(0.0) {}
+
+void Fluxo::setNome(const string &nome) {
+    this->nome = nome;
+}
+string Fluxo::getNome() const {
+    return nome;
+}
 
 void Fluxo::setSistemaEntrada(Sistema *entrada) {
     this->entrada = entrada;

@@ -27,6 +27,8 @@ public:
     void setNome(const string &nome);
     void adicionarSistema(Sistema *sistema);
     void adicionarFluxo(Fluxo *fluxo);
+    void setTempoInicial(int tempoInicial);
+    void setTempoFinal(int tempoFinal);
 
     void run(bool printar = false);
     void printarSistemas(int tempo);
