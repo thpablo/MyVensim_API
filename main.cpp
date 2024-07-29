@@ -225,7 +225,7 @@ int main()
 #endif
 
 #ifdef CASO4
-    Modelo caso4 = Modelo("Caso 4", tempoInicial, 10); 
+    Modelo caso4 = Modelo("Caso 4"); 
     Sistema sistemaEntrada = Sistema("Sistema Entrada", 100);
     FluxoEntrada fluxoEntrada = FluxoEntrada("Fluxo Entrada", &sistemaEntrada, nullptr);
     caso4.adicionarSistema(&sistemaEntrada);

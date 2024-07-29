@@ -7,8 +7,6 @@ Modelo::Modelo() : nome(""), tempoInicial(0), tempoFinal(0) {}
 
 Modelo::Modelo(string nome) : nome(nome), tempoInicial(0), tempoFinal(0) {}
 
-Modelo::Modelo(string nome, int tempoInicial) : nome(nome), tempoInicial(tempoInicial), tempoFinal(0) {}
-
 Modelo::Modelo(string nome, int tempoInicial, int tempoFinal) : nome(nome), tempoInicial(tempoInicial), tempoFinal(tempoFinal) {}
 
 void Modelo::setNome(const string &nome) {
