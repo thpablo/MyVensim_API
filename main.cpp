@@ -123,13 +123,12 @@ public:
     }
 };
 
-#define MODELO_X
-#define CASO4
-
+#define MODELO_3
+#define CASOx
 int main()
 {
     int tempoInicial = 0;
-    int tempoFinal = 100;
+    int tempoFinal = 10;
 
 #ifdef MODELO_1
     // Criação do modelo
@@ -225,7 +224,7 @@ int main()
 #endif
 
 #ifdef CASO4
-    Modelo caso4 = Modelo("Caso 4"); 
+    Modelo caso4 = Modelo("Caso 4", 0, 100); 
     Sistema sistemaEntrada = Sistema("Sistema Entrada", 100);
     FluxoEntrada fluxoEntrada = FluxoEntrada("Fluxo Entrada", &sistemaEntrada, nullptr);
     caso4.adicionarSistema(&sistemaEntrada);

@@ -17,6 +17,9 @@ private:
     string nome;
     int tempoInicial;
     int tempoFinal;
+    void imprimirSistemas();
+    //void printarFluxosEnquantoExecuta(int tempo);
+    //void printarSistemasEnquantoExecuta(int tempo);
 
 public:
     Modelo();
@@ -30,7 +33,6 @@ public:
     void setTempoFinal(int tempoFinal);
 
     void run(bool printar = false);
-    void printarSistemas(int tempo);
 };
 
 #endif // MODELO_H

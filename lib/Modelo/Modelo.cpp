@@ -32,9 +32,14 @@ void Modelo::adicionarFluxo(Fluxo *fluxo) {
     fluxos.push_back(fluxo);
 }
 
+void Modelo::imprimirSistemas() {
+    for (auto it = sistemas.begin(); it != sistemas.end(); ++it)
+        cout << (*it)->getNome() << ": " << (*it)->getValorAcumulador() << endl;
+}
+
 void Modelo::run(bool printar) {
+    
     for (int i = tempoInicial; i <= tempoFinal; i++) {
-        printar ? printarSistemas(i) : void();
         for (auto it = fluxos.begin(); it != fluxos.end(); ++it)
             (*it)->setValorTransporte((*it)->execute());
 
@@ -48,16 +53,22 @@ void Modelo::run(bool printar) {
                 saida->setValorAcumulador(saida->getValorAcumulador() + (*it)->getValorTransporte());
         }
     }
+    // Printar valores finais
+    printar ? imprimirSistemas() : void();
 }
 
-void Modelo::printarSistemas(int tempo) {
+/*
+void Modelo::printarFluxosEnquantoExecuta(int tempo) {
     cout << "Tempo: " << tempo << endl;
     for (auto it = fluxos.begin(); it != fluxos.end(); ++it)
         cout << (*it)->getNome() << ": " << (*it)->getValorTransporte() << "    ";
 
     cout << endl;
+}
 
-    for (auto it = sistemas.begin(); it != sistemas.end(); ++it)
+void Modelo::printarSistemasEnquantoExecuta(int tempo){
+for (auto it = sistemas.begin(); it != sistemas.end(); ++it)
         cout << "\t\t" << (*it)->getNome() << ":\t" << (*it)->getValorAcumulador() << endl;
     cout << "---------------------------------" << endl;
 }
+*/
