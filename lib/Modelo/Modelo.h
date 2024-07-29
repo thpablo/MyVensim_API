@@ -21,7 +21,6 @@ private:
 public:
     Modelo();
     Modelo(string nome);
-    Modelo(string nome);
     Modelo(string nome, int tempoInicial, int tempoFinal);
 
     void setNome(const string &nome);
