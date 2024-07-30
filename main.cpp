@@ -1,177 +1,191 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "lib/Modelo/Modelo.h"
+#include "lib/Model/Model.h"
+
+/* IMPLEMENT DESTRUCTOR AND CANONICAL FORM FOR ALL CLASSES
+COPY CONSTRUCTOR FOR ALL CLASSES
+OVERLOAD OPERATOR =
+DESTRUCTOR
+---
+ASSERT COMPARISON -> (SYSTEM VALUE - TRUE SYSTEM VALUE) < 0.0001 (DECIMAL PLACES VERIFICATION)
+Functional tests and check if unit tests need to be done
+*/
+
+#define MODEL_3
+#define CASE_X
+
 using namespace std;
-// Implementação de polimorfismos dos fluxos
-class Exponencial : public Fluxo
+
+// Polymorphism implementation of flows
+class Exponential : public Flow
 {
 public:
-    Exponencial(string nome, Sistema *entrada, Sistema *saida) : Fluxo(nome, entrada, saida) {}
+    Exponential(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getSistemaEntrada()->getValorAcumulador();
+        return 0.01 * getInputSystem()->getAccumulatorValue();
     }
 };
 
-class Logistica : public Fluxo
+class Logistic : public Flow
 {
 public:
-    Logistica(string nome, Sistema *entrada, Sistema *saida) : Fluxo(nome, entrada, saida) {}
+    Logistic(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getSistemaSaida()->getValorAcumulador() * (1 - (getSistemaSaida()->getValorAcumulador()) / 70);
+        return 0.01 * getOutputSystem()->getAccumulatorValue() * (1 - (getOutputSystem()->getAccumulatorValue()) / 70);
     }
 };
 
-class V : public Fluxo
+class V : public Flow
 {
 public:
-    V(string nome, Sistema *entrada, Sistema *saida) : Fluxo(nome, entrada, saida) {}
+    V(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getSistemaEntrada()->getValorAcumulador();
+        return 0.01 * getInputSystem()->getAccumulatorValue();
     }
 };
 
-class U : public Fluxo
+class U : public Flow
 {
 public:
-    U(string nome, Sistema *entrada, Sistema *saida) : Fluxo(nome, entrada, saida) {}
+    U(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getSistemaEntrada()->getValorAcumulador();
+        return 0.01 * getInputSystem()->getAccumulatorValue();
     }
 };
 
-class G : public Fluxo
+class G : public Flow
 {
 public:
-    G(string nome, Sistema *entrada, Sistema *saida) : Fluxo(nome, entrada, saida) {}
+    G(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getSistemaEntrada()->getValorAcumulador();
+        return 0.01 * getInputSystem()->getAccumulatorValue();
     }
 };
 
-class F : public Fluxo
+class F : public Flow
 {
 public:
-    F(string nome, Sistema *entrada, Sistema *saida) : Fluxo(nome, entrada, saida) {}
+    F(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getSistemaEntrada()->getValorAcumulador();
+        return 0.01 * getInputSystem()->getAccumulatorValue();
     }
 };
 
-class R : public Fluxo
+class R : public Flow
 {
 public:
-    R(string nome, Sistema *entrada, Sistema *saida) : Fluxo(nome, entrada, saida) {}
+    R(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getSistemaEntrada()->getValorAcumulador();
+        return 0.01 * getInputSystem()->getAccumulatorValue();
     }
 };
 
-class T : public Fluxo
+class T : public Flow
 {
 public:
-    T(string nome, Sistema *entrada, Sistema *saida) : Fluxo(nome, entrada, saida) {}
+    T(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getSistemaEntrada()->getValorAcumulador();
+        return 0.01 * getInputSystem()->getAccumulatorValue();
     }
 };
 
-class Isolado : public Fluxo
+class Isolated : public Flow
 {
 public:
-    Isolado(string nome, Sistema * entrada, Sistema * saida) : Fluxo(nome, entrada, saida) {}
+    Isolated(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
         return 1;
     }
 };
 
-class FluxoSaida : public Fluxo
+class OutputFlow : public Flow
 {
 public:
-    FluxoSaida(string nome, Sistema * entrada, Sistema * saida) : Fluxo(nome, entrada, saida) {}
+    OutputFlow(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
         return 1;
     }
 };
 
-class FluxoEntrada  : public Fluxo
+class InputFlow : public Flow
 {
 public:
-    FluxoEntrada(string nome, Sistema * entrada, Sistema * saida) : Fluxo(nome, entrada, saida) {}
+    InputFlow(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
         return 1;
     }
 };
-class FluxoEntradaESaida : public Fluxo
+
+class InputOutputFlow : public Flow
 {
 public:
-    FluxoEntradaESaida(string nome, Sistema * entrada, Sistema * saida) : Fluxo(nome, entrada, saida) {}
+    InputOutputFlow(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 1 + getSistemaEntrada()->getValorAcumulador();
+        return 1 + getInputSystem()->getAccumulatorValue();
     }
 };
 
-#define MODELO_3
-#define CASOx
 int main()
 {
-    int tempoInicial = 0;
-    int tempoFinal = 10;
+    int initialTime = 0;
+    int finalTime = 10;
 
-#ifdef MODELO_1
-    // Criação do modelo
-    Modelo m1 = Modelo("Modelo 1", tempoInicial, tempoFinal);
+//#ifdef MODEL_1
+    // Create the model
+    Model m1 = Model("Model 1", initialTime, finalTime);
 
-    // Adiciona Sistemas
-    Sistema s1 = Sistema("POP 1", 100);
-    Sistema s2 = Sistema("POP 2", 0);
+    // Add systems
+    System s1 = System("POP 1", 100);
+    System s2 = System("POP 2", 0);
 
-    // Adiciona Sistemas e fluxos
-    Exponencial fluxo1 = Exponencial("exponencial", &s1, &s2);
+    // Add systems and flows
+    Exponential flow1 = Exponential("exponential", &s1, &s2);
 
-    // Adiciona Sistemas e fluxos ao modelo
-    m1.adicionarSistema(&s1);
-    m1.adicionarSistema(&s2);
-    m1.adicionarFluxo(&fluxo1);
-    // Execução
-    m1.run(true);
+    // Add systems and flows to the model
+    m1.add(&s1);
+    m1.add(&s2);
+    m1.add(&flow1);
 
-#endif
+    // Execution
+    m1.run(0,100);
 
-#ifdef MODELO_2
+//#endif
 
-    Modelo m2 = Modelo("Modelo 2", tempoInicial, tempoFinal);
+//#ifdef MODEL_2
 
-    Sistema s3 = Sistema("p1", 100);
-    Sistema s4 = Sistema("p2", 10);
+    Model m2 = Model("Model 2", initialTime, finalTime);
 
-    Logistica fluxo2 = Logistica("logistica", &s3, &s4);
+    System s3 = System("p1", 100);
+    System s4 = System("p2", 10);
 
-    m2.adicionarSistema(&s3);
-    m2.adicionarSistema(&s4);
-    m2.adicionarFluxo(&fluxo2);
+    Logistic flow2 = Logistic("logistic", &s3, &s4);
 
-    m2.run(true);
-#endif
+    m2.add(&s3);
+    m2.add(&s4);
+    m2.add(&flow2);
 
-#ifdef MODELO_3
-    Sistema Q1 = Sistema("Q1", 100);
-    Sistema Q2 = Sistema("Q2", 0);
-    Sistema Q3 = Sistema("Q3", 100);
-    Sistema Q4 = Sistema("Q4", 0);
-    Sistema Q5 = Sistema("Q5", 0);
+    m2.run(0,10);
+//#endif
+
+//#ifdef MODEL_3
+    System Q1 = System("Q1", 100);
+    System Q2 = System("Q2", 0);
+    System Q3 = System("Q3", 100);
+    System Q4 = System("Q4", 0);
+    System Q5 = System("Q5", 0);
 
     F f = F("F", &Q1, &Q2);
     G g = G("G", &Q1, &Q3);
@@ -180,68 +194,68 @@ int main()
     U u = U("U", &Q3, &Q4);
     V v = V("V", &Q4, &Q1);
 
-    Modelo m3 = Modelo("Modelo 3", tempoInicial, tempoFinal);
-    m3.adicionarSistema(&Q1);
-    m3.adicionarSistema(&Q2);
-    m3.adicionarSistema(&Q3);
-    m3.adicionarSistema(&Q4);
-    m3.adicionarSistema(&Q5);
+    Model m3 = Model("Model 3", initialTime, finalTime);
+    m3.add(&Q1);
+    m3.add(&Q2);
+    m3.add(&Q3);
+    m3.add(&Q4);
+    m3.add(&Q5);
 
-    m3.adicionarFluxo(&f);
-    m3.adicionarFluxo(&g);
-    m3.adicionarFluxo(&r);
-    m3.adicionarFluxo(&t);
-    m3.adicionarFluxo(&u);
-    m3.adicionarFluxo(&v);
-    m3.run(true);
+    m3.add(&f);
+    m3.add(&g);
+    m3.add(&r);
+    m3.add(&t);
+    m3.add(&u);
+    m3.add(&v);
+    m3.run(0,10);
 
-#endif
+//#endif
 
-#ifdef CASO1
-    Modelo caso1 = Modelo("Caso 1", tempoInicial, 10);  
-    Sistema sistemaIsolado = Sistema("Sistema Isolado", 100);
+//#ifdef CASE_1
+    Model case1 = Model("Case 1", initialTime, 10);
+    System isolatedSystem = System("Isolated System", 100);
 
-    caso1.adicionarSistema(&sistemaIsolado);
-    caso1.run(true);
+    case1.add(&isolatedSystem);
+    case1.run(0,10);
 
-#endif
+//#endif
 
-#ifdef CASO2
-    Modelo caso2 = Modelo("Caso 2", tempoInicial, 10);
-    Isolado fluxoIsolado = Isolado("Fluxo Isolado", nullptr, nullptr);
-    caso2.adicionarFluxo(&fluxoIsolado);
-    caso2.run(true);
+//#ifdef CASE_2
+    Model case2 = Model("Case 2", initialTime, 10);
+    Isolated isolatedFlow = Isolated("Isolated Flow", nullptr, nullptr);
+    case2.add(&isolatedFlow);
+    case2.run(0,10);
 
-#endif
+//#endif
 
-#ifdef CASO3
-    Modelo caso3 = Modelo("Caso 3", tempoInicial, 10);
-    Sistema sistemaSaida = Sistema("Sistema Saida", 0);
-    FluxoSaida fluxoSaida = FluxoSaida("Fluxo Saida", nullptr, &sistemaSaida);
-    caso3.adicionarSistema(&sistemaSaida);
-    caso3.adicionarFluxo(&fluxoSaida);
-    caso3.run(true);
-#endif
+//#ifdef CASE_3
+    Model case3 = Model("Case 3", initialTime, 10);
+    System outputSystem = System("Output System", 0);
+    OutputFlow outputFlow = OutputFlow("Output Flow", nullptr, &outputSystem);
+    case3.add(&outputSystem);
+    case3.add(&outputFlow);
+    case3.run(0,10);
+//#endif
 
-#ifdef CASO4
-    Modelo caso4 = Modelo("Caso 4", 0, 100); 
-    Sistema sistemaEntrada = Sistema("Sistema Entrada", 100);
-    FluxoEntrada fluxoEntrada = FluxoEntrada("Fluxo Entrada", &sistemaEntrada, nullptr);
-    caso4.adicionarSistema(&sistemaEntrada);
-    caso4.adicionarFluxo(&fluxoEntrada);
-    caso4.run(true);
-#endif
+//#ifdef CASE_4
+    Model case4 = Model("Case 4", 0, 100);
+    System inputSystem = System("Input System", 100);
+    InputFlow inputFlow = InputFlow("Input Flow", &inputSystem, nullptr);
+    case4.add(&inputSystem);
+    case4.add(&inputFlow);
+    case4.run(0,10);
+//#endif
 
-#ifdef CASO5
-    Modelo caso5 = Modelo("Caso 5", tempoInicial, 10);
-    Sistema sistemaEntrada = Sistema("Sistema Entrada", 10);
-    Sistema sistemaSaida = Sistema("Sistema Saida", 0);
-    fluxoEntradaESaida fluxoEntradaESaida = fluxoEntradaESaida("Fluxo Entrada e Saida", &sistemaEntrada, &sistemaSaida);
-    caso5.adicionarSistema(&sistemaEntrada);
-    caso5.adicionarSistema(&sistemaSaida);
-    caso5.adicionarFluxo(&fluxoEntradaESaida);
-    caso5.run(true);
-#endif
+//#ifdef CASE_5
+    Model case5 = Model("Case 5", initialTime, 10);
+    System inputSystem = System("Input System", 10);
+    System outputSystem = System("Output System", 0);
+    InputOutputFlow inputOutputFlow = InputOutputFlow("Input and Output Flow", &inputSystem, &outputSystem);
+    case5.add(&inputSystem);
+    case5.add(&outputSystem);
+    case5.add(&inputOutputFlow);
+    case5.run(0,10);
+//#endif
 
     return 0;
 }
