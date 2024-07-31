@@ -24,7 +24,7 @@ public:
     Exponential(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getInputSystem()->getAccumulatorValue();
+        return 0.01 * getSource()->getAccumulatorValue();
     }
 };
 
@@ -34,7 +34,7 @@ public:
     Logistic(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getOutputSystem()->getAccumulatorValue() * (1 - (getOutputSystem()->getAccumulatorValue()) / 70);
+        return 0.01 * getTarget()->getAccumulatorValue() * (1 - (getTarget()->getAccumulatorValue()) / 70);
     }
 };
 
@@ -44,7 +44,7 @@ public:
     V(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getInputSystem()->getAccumulatorValue();
+        return 0.01 * getSource()->getAccumulatorValue();
     }
 };
 
@@ -54,7 +54,7 @@ public:
     U(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getInputSystem()->getAccumulatorValue();
+        return 0.01 * getSource()->getAccumulatorValue();
     }
 };
 
@@ -64,7 +64,7 @@ public:
     G(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getInputSystem()->getAccumulatorValue();
+        return 0.01 * getSource()->getAccumulatorValue();
     }
 };
 
@@ -74,7 +74,7 @@ public:
     F(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getInputSystem()->getAccumulatorValue();
+        return 0.01 * getSource()->getAccumulatorValue();
     }
 };
 
@@ -84,7 +84,7 @@ public:
     R(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getInputSystem()->getAccumulatorValue();
+        return 0.01 * getSource()->getAccumulatorValue();
     }
 };
 
@@ -94,7 +94,7 @@ public:
     T(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 0.01 * getInputSystem()->getAccumulatorValue();
+        return 0.01 * getSource()->getAccumulatorValue();
     }
 };
 
@@ -134,7 +134,7 @@ public:
     InputOutputFlow(string name, System *input, System *output) : Flow(name, input, output) {}
     double execute() override
     {
-        return 1 + getInputSystem()->getAccumulatorValue();
+        return 1 + getSource()->getAccumulatorValue();
     }
 };
 

@@ -32,8 +32,8 @@ void Model::run(int initialTime, int finalTime) {
             (*it)->setTransportValue((*it)->execute());
 
         for (auto it = flows.begin(); it != flows.end(); ++it) {
-            System *input = (*it)->getInputSystem();
-            System *output = (*it)->getOutputSystem();
+            System *input = (*it)->getTarget();
+            System *output = (*it)->getSource();
 
             if(input != nullptr)
                 input->setAccumulatorValue(input->getAccumulatorValue() - (*it)->getTransportValue());

@@ -7,22 +7,22 @@ class Flow
 {
 private:
     string name;
-    System *input;
-    System *output;
+    System *source;
+    System *target;
     double transportValue;
 
 public:
     virtual double execute() = 0;
     Flow();
-    Flow(string name, System *input, System *output);
+    Flow(string name, System *source, System *target);
 
     void setName(const string &name);
     string getName() const;
-    void setInputSystem(System *input);
-    void setOutputSystem(System *output);
+    void setSource(System *source);
+    void setTarget(System *target);
 
-    System *getInputSystem() const;
-    System *getOutputSystem() const;
+    System *getSource() const;
+    System *getTarget() const;
 
     void setTransportValue(double value);
     double getTransportValue() const;
