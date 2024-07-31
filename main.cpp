@@ -1,7 +1,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "lib/Model/Model.h"
+#include "./src/Model.h"
+#include "./src/Flow.h"
+#include "./src/System.h"
 
 /* IMPLEMENT DESTRUCTOR AND CANONICAL FORM FOR ALL CLASSES
 COPY CONSTRUCTOR FOR ALL CLASSES
@@ -16,87 +18,6 @@ Functional tests and check if unit tests need to be done
 #define CASE_X
 
 using namespace std;
-
-// Polymorphism implementation of flows
-class Exponential : public Flow
-{
-public:
-    Exponential(string name, System *input, System *output) : Flow(name, input, output) {}
-    double execute() override
-    {
-        return 0.01 * getSource()->getAccumulatorValue();
-    }
-};
-
-class Logistic : public Flow
-{
-public:
-    Logistic(string name, System *input, System *output) : Flow(name, input, output) {}
-    double execute() override
-    {
-        return 0.01 * getTarget()->getAccumulatorValue() * (1 - (getTarget()->getAccumulatorValue()) / 70);
-    }
-};
-
-class V : public Flow
-{
-public:
-    V(string name, System *input, System *output) : Flow(name, input, output) {}
-    double execute() override
-    {
-        return 0.01 * getSource()->getAccumulatorValue();
-    }
-};
-
-class U : public Flow
-{
-public:
-    U(string name, System *input, System *output) : Flow(name, input, output) {}
-    double execute() override
-    {
-        return 0.01 * getSource()->getAccumulatorValue();
-    }
-};
-
-class G : public Flow
-{
-public:
-    G(string name, System *input, System *output) : Flow(name, input, output) {}
-    double execute() override
-    {
-        return 0.01 * getSource()->getAccumulatorValue();
-    }
-};
-
-class F : public Flow
-{
-public:
-    F(string name, System *input, System *output) : Flow(name, input, output) {}
-    double execute() override
-    {
-        return 0.01 * getSource()->getAccumulatorValue();
-    }
-};
-
-class R : public Flow
-{
-public:
-    R(string name, System *input, System *output) : Flow(name, input, output) {}
-    double execute() override
-    {
-        return 0.01 * getSource()->getAccumulatorValue();
-    }
-};
-
-class T : public Flow
-{
-public:
-    T(string name, System *input, System *output) : Flow(name, input, output) {}
-    double execute() override
-    {
-        return 0.01 * getSource()->getAccumulatorValue();
-    }
-};
 
 class Isolated : public Flow
 {
@@ -143,44 +64,7 @@ int main()
     int initialTime = 0;
     int finalTime = 10;
 
-//#ifdef MODEL_1
-    // Create the model
-    Model m1 = Model("Model 1");
-
-    // Add systems
-    System s1 = System("POP 1", 100);
-    System s2 = System("POP 2", 0);
-
-    // Add systems and flows
-    Exponential flow1 = Exponential("exponential", &s1, &s2);
-
-    // Add systems and flows to the model
-    m1.add(&s1);
-    m1.add(&s2);
-    m1.add(&flow1);
-
-    // Execution
-    m1.run(0,100);
-
-//#endif
-
-//#ifdef MODEL_2
-
-    Model m2 = Model("Model 2");
-
-    System s3 = System("p1", 100);
-    System s4 = System("p2", 10);
-
-    Logistic flow2 = Logistic("logistic", &s3, &s4);
-
-    m2.add(&s3);
-    m2.add(&s4);
-    m2.add(&flow2);
-
-    m2.run(0,10);
-//#endif
-
-//#ifdef MODEL_3
+#ifdef MODEL_3
     System Q1 = System("Q1", 100);
     System Q2 = System("Q2", 0);
     System Q3 = System("Q3", 100);
@@ -209,44 +93,44 @@ int main()
     m3.add(&v);
     m3.run(0,10);
 
-//#endif
+#endif
 
-//#ifdef CASE_1
+#ifdef CASE_1
     Model case1 = Model("Case 1");
     System isolatedSystem = System("Isolated System", 100);
 
     case1.add(&isolatedSystem);
     case1.run(0,10);
 
-//#endif
+#endif
 
-//#ifdef CASE_2
+#ifdef CASE_2
     Model case2 = Model("Case 2");
     Isolated isolatedFlow = Isolated("Isolated Flow", nullptr, nullptr);
     case2.add(&isolatedFlow);
     case2.run(0,10);
 
-//#endif
+#endif
 
-//#ifdef CASE_3
+#ifdef CASE_3
     Model case3 = Model("Case 3");
     System outputSystem = System("Output System", 0);
     OutputFlow outputFlow = OutputFlow("Output Flow", nullptr, &outputSystem);
     case3.add(&outputSystem);
     case3.add(&outputFlow);
     case3.run(0,10);
-//#endif
+#endif
 
-//#ifdef CASE_4
+#ifdef CASE_4
     Model case4 = Model("Case 4");
     System inputSystem = System("Input System", 100);
     InputFlow inputFlow = InputFlow("Input Flow", &inputSystem, nullptr);
     case4.add(&inputSystem);
     case4.add(&inputFlow);
     case4.run(0,10);
-//#endif
+#endif
 
-//#ifdef CASE_5
+#ifdef CASE_5
     Model case5 = Model("Case 5");
     System inputSystem = System("Input System", 10);
     System outputSystem = System("Output System", 0);
@@ -255,7 +139,7 @@ int main()
     case5.add(&outputSystem);
     case5.add(&inputOutputFlow);
     case5.run(0,10);
-//#endif
+#endif
 
     return 0;
 }

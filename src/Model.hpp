@@ -1,8 +1,8 @@
 #ifndef MODELO_H
 #define MODELO_H
 
-#include "../Flow/Flow.h"
-#include "../System/System.h"
+#include "./Flow.hpp"
+#include "./System.hpp"
 #include <vector>
 #include <string>
 
@@ -22,6 +22,9 @@ private:
 public:
     Model();
     Model(string name);
+
+    Model(const Model &m);
+    Model &operator=(const Model &m);
 
     void setName(const string &name);
     void add(System *system);

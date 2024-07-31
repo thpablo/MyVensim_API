@@ -14,7 +14,8 @@ public:
     System();
     System(string name);
     System(string name, double value);
-
+    System(const System &s);
+    System &operator=(const System &s);
     void setName(const string &name);
     string getName() const;
 

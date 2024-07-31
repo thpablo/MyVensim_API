@@ -1,7 +1,7 @@
 #ifndef FLOW_H
 #define FLOW_H
 
-#include "../System/System.h"
+#include "./System.hpp"
 
 class Flow
 {
@@ -12,9 +12,14 @@ private:
     double transportValue;
 
 public:
-    virtual double execute() = 0;
     Flow();
     Flow(string name, System *source, System *target);
+    // Copy constructor
+    Flow(const Flow &f);
+    Flow &operator=(const Flow &f);
+
+    // Create a new Flow object for derivate classes
+    virtual Flow *create() const = 0;
 
     void setName(const string &name);
     string getName() const;
@@ -26,6 +31,9 @@ public:
 
     void setTransportValue(double value);
     double getTransportValue() const;
+
+    virtual double execute() = 0;
+
     virtual ~Flow(); // Destructor declaration
 };
 
