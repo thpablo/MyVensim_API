@@ -22,7 +22,6 @@ private:
 public:
     Model();
     Model(string name);
-    Model(string name, int initialTime, int finalTime);
 
     void setName(const string &name);
     void add(System *system);

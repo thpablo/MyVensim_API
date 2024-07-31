@@ -145,7 +145,7 @@ int main()
 
 //#ifdef MODEL_1
     // Create the model
-    Model m1 = Model("Model 1", initialTime, finalTime);
+    Model m1 = Model("Model 1");
 
     // Add systems
     System s1 = System("POP 1", 100);
@@ -166,7 +166,7 @@ int main()
 
 //#ifdef MODEL_2
 
-    Model m2 = Model("Model 2", initialTime, finalTime);
+    Model m2 = Model("Model 2");
 
     System s3 = System("p1", 100);
     System s4 = System("p2", 10);
@@ -194,7 +194,7 @@ int main()
     U u = U("U", &Q3, &Q4);
     V v = V("V", &Q4, &Q1);
 
-    Model m3 = Model("Model 3", initialTime, finalTime);
+    Model m3 = Model("Model 3");
     m3.add(&Q1);
     m3.add(&Q2);
     m3.add(&Q3);
@@ -212,7 +212,7 @@ int main()
 //#endif
 
 //#ifdef CASE_1
-    Model case1 = Model("Case 1", initialTime, 10);
+    Model case1 = Model("Case 1");
     System isolatedSystem = System("Isolated System", 100);
 
     case1.add(&isolatedSystem);
@@ -221,7 +221,7 @@ int main()
 //#endif
 
 //#ifdef CASE_2
-    Model case2 = Model("Case 2", initialTime, 10);
+    Model case2 = Model("Case 2");
     Isolated isolatedFlow = Isolated("Isolated Flow", nullptr, nullptr);
     case2.add(&isolatedFlow);
     case2.run(0,10);
@@ -229,7 +229,7 @@ int main()
 //#endif
 
 //#ifdef CASE_3
-    Model case3 = Model("Case 3", initialTime, 10);
+    Model case3 = Model("Case 3");
     System outputSystem = System("Output System", 0);
     OutputFlow outputFlow = OutputFlow("Output Flow", nullptr, &outputSystem);
     case3.add(&outputSystem);
@@ -238,7 +238,7 @@ int main()
 //#endif
 
 //#ifdef CASE_4
-    Model case4 = Model("Case 4", 0, 100);
+    Model case4 = Model("Case 4");
     System inputSystem = System("Input System", 100);
     InputFlow inputFlow = InputFlow("Input Flow", &inputSystem, nullptr);
     case4.add(&inputSystem);
@@ -247,7 +247,7 @@ int main()
 //#endif
 
 //#ifdef CASE_5
-    Model case5 = Model("Case 5", initialTime, 10);
+    Model case5 = Model("Case 5");
     System inputSystem = System("Input System", 10);
     System outputSystem = System("Output System", 0);
     InputOutputFlow inputOutputFlow = InputOutputFlow("Input and Output Flow", &inputSystem, &outputSystem);
