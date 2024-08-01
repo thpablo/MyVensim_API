@@ -33,8 +33,7 @@ public:
     double getTransportValue() const;
 
     virtual double execute() = 0;
-
-    virtual ~Flow(); // Destructor declaration
+    ~Flow();
 };
 
 #endif // FLOW_H

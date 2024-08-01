@@ -15,7 +15,6 @@ private:
     vector<System *> systems;
 
     string name;
-    void printSystems();
     //void printFlowsWhileExecuting(int time);
     //void printSystemsWhileExecuting(int time);
 
@@ -23,15 +22,23 @@ public:
     Model();
     Model(string name);
 
-    Model(const Model &m);
-    Model &operator=(const Model &m);
+    //Model(const Model &m);
+    //Model &operator=(const Model &m);
 
     void setName(const string &name);
     void add(System *system);
     void add(Flow *flow);
 
     void run(int initialTime, int finalTime);
-    ~Model();
+    //~Model();
+
+
+
+    void printRun(int time);
+    void printSystems();
+
+
+
 };
 
 #endif // MODELO_H

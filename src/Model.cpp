@@ -7,6 +7,7 @@ Model::Model() : name(""){}
 
 Model::Model(string name) : name(name) {}
 
+/*
 // Copy constructor
 Model::Model(const Model &m) : name(m.name) {
     
@@ -67,7 +68,7 @@ Model &Model::operator=(const Model &m) {
 
     return *this;
 }
-
+*/
 void Model::setName(const string &name) {
     this->name = name;
 }
@@ -88,30 +89,47 @@ void Model::printSystems() {
 
 void Model::run(int initialTime, int finalTime) {
     
-    for (int i = initialTime; i <= finalTime; i++) {
+    for (int i = initialTime; i < finalTime; i++) {
         for (auto it = flows.begin(); it != flows.end(); ++it)
             (*it)->setTransportValue((*it)->execute());
 
         for (auto it = flows.begin(); it != flows.end(); ++it) {
-            System *input = (*it)->getTarget();
-            System *output = (*it)->getSource();
+            System *input = (*it)->getSource();
+            System *output = (*it)->getTarget();
 
             if(input != nullptr)
                 input->setAccumulatorValue(input->getAccumulatorValue() - (*it)->getTransportValue());
             if(output != nullptr)
                 output->setAccumulatorValue(output->getAccumulatorValue() + (*it)->getTransportValue());
         }
+        printRun(i+1);
     }
     // Print final values
     //print ? printSystems() : void();
 }
 
-
+/*
 Model::~Model() {
-    for (auto it = flows.begin(); it != flows.end(); ++it) {
-        delete *it;
+    // Delete and clear the systems
+    for(System* s : systems){
+        delete s;
     }
-    for (auto it = systems.begin(); it != systems.end(); ++it) {
-        delete *it;
+    systems.clear();
+
+    // Delete and clear the flows    
+    for(Flow* f : flows){
+        delete f;
     }
+    flows.clear();
+}
+*/
+
+void Model::printRun(int time) {
+    cout << "Time: " << time << endl;
+    for(auto it = flows.begin(); it != flows.end(); ++it){
+        cout << (*it)->getName() << ": " << (*it)->getTransportValue() << " ";
+    }
+    cout << endl;
+    for(auto it = systems.begin(); it != systems.end(); ++it)
+        cout << (*it)->getName() << ": " << (*it)->getAccumulatorValue() << endl;
 }

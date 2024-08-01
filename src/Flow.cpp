@@ -50,7 +50,4 @@ void Flow::setTransportValue(double value) {
 double Flow::getTransportValue() const {
     return transportValue;
 }
-
-Flow::~Flow() {
-    
-}
+Flow::~Flow() {}

@@ -35,6 +35,5 @@ void System::setAccumulatorValue(double value) {
 double System::getAccumulatorValue() const {
     return accumulatorValue;
 }
-System::~System() {
 
-}
+System::~System() {}

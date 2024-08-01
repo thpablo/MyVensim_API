@@ -22,7 +22,8 @@ public:
     void setAccumulatorValue(double value);
     double getAccumulatorValue() const;
 
-    ~System(); // Destructor declaration
-};;
+    ~System();
+
+};
 
 #endif // SYSTEM_H

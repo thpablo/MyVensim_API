@@ -1,4 +1,6 @@
 #include "./funcional_tests.hpp"
+#include <assert.h>
+#include <cmath>
 // Exponential Class
 class Exponential : public Flow
 {
@@ -41,7 +43,7 @@ public:
     }
 };
 
-bool exponentialFuntionalTest()
+void exponentialFuncionalTest()
 {
     // Create the model
     Model m1 = Model("Model 1");
@@ -61,9 +63,10 @@ bool exponentialFuntionalTest()
     // Execution
     m1.run(0,100);
 
-    //assert(source->getAccumulatorValue() == );
+    assert(fabs(source.getAccumulatorValue() - 36.6032) < 0.0001);
+    assert(fabs(target.getAccumulatorValue() - 63.3968) < 0.0001);
 }
-bool logisticFuntionalTest()
+void logisticalFuncionalTest()
 {
     // Create the model
     Model m2 = Model("Model 2");
@@ -79,10 +82,11 @@ bool logisticFuntionalTest()
 
     m2.run(0,100);
 
-    //assert(target.getAccumulatorValue() == );
+    assert(fabs(source.getAccumulatorValue() - 88.2167) < 0.0001);
+    assert(fabs(target.getAccumulatorValue() - 21.7833) < 0.0001);
 }
 
-bool complexFuntionalTest()
+void complexFuncionalTest()
 {
    System Q1 = System("Q1", 100);
     System Q2 = System("Q2", 0);
@@ -111,6 +115,12 @@ bool complexFuntionalTest()
     m3.add(&u);
     m3.add(&v);
     m3.run(0,100);
+
+    assert(fabs(Q1.getAccumulatorValue() - 31.8513) < 0.0001);
+    assert(fabs(Q2.getAccumulatorValue() - 18.4003) < 0.0001);
+    assert(fabs(Q3.getAccumulatorValue() - 77.1143) < 0.0001);
+    assert(fabs(Q4.getAccumulatorValue() - 56.1728) < 0.0001);
+    assert(fabs(Q5.getAccumulatorValue() - 16.4612) < 0.0001);
 
     //* Asserts
 }

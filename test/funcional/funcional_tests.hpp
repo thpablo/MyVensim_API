@@ -3,10 +3,12 @@
 
 #include <assert.h>
 
-#include "../src/Model.hpp"
+#include "../../src/System.hpp"
+#include "../../src/Flow.hpp"
+#include "../../src/Model.hpp"
 
-bool exponentialFuncionalTest();
-bool logisticalFuncionalTest();
-bool complexFuncionalTest();
+void exponentialFuncionalTest();
+void logisticalFuncionalTest();
+void complexFuncionalTest();
 
-#endif //FUNCIONAL_TESTS
+#endif //FUNCIONAL_TESTStest/funcional/funcional_tests.cpp test/funcional/funcional_tests.hpp test/funcional/main.cpp
