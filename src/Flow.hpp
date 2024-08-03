@@ -18,9 +18,6 @@ public:
     Flow(const Flow &f);
     Flow &operator=(const Flow &f);
 
-    // Create a new Flow object for derivate classes
-    virtual Flow *create() const = 0;
-
     void setName(const string &name);
     string getName() const;
     void setSource(System *source);
@@ -33,7 +30,7 @@ public:
     double getTransportValue() const;
 
     virtual double execute() = 0;
-    ~Flow();
+    virtual ~Flow();
 };
 
 #endif // FLOW_H

@@ -1,135 +1,118 @@
 #include "./Model.hpp"
-#include <iostream>
 
 using namespace std;
 
-Model::Model() : name(""){}
+Model::Model() : name("") {}
 
 Model::Model(string name) : name(name) {}
 
-/*
 // Copy constructor
-Model::Model(const Model &m) : name(m.name) {
-    
-    // Delete and clear the systems
-    for(System* s : systems){
-        delete s;
-    }
+Model::Model(const Model &m) : name(m.name)
+{
+    // Clear the systems vector
     systems.clear();
 
-    // Make a deep copy of the systems
-    for (auto it = m.systems.begin(); it != m.systems.end(); ++it){
-        System *s = new System(**it);
-        systems.push_back(s);
+    for (auto it = m.systems.begin(); it != m.systems.end(); ++it)
+    {
+        add(&(**it));
     }
 
-    // Delete and clear the flows    
-    for(Flow* f : flows){
-        delete f;
-    }
+    // Clear the flows vector
     flows.clear();
 
-    // Make a deep copy of the flows
-    for (auto it = m.flows.begin(); it != m.flows.end(); ++it){
-        flows.push_back((*it)->create());
+    for (auto it = m.flows.begin(); it != m.flows.end(); ++it)
+    {
+        add(&(**it));
     }
 }
 
 // Overload of the assignment operator
-Model &Model::operator=(const Model &m) {
-    //Verify if the object is the same
-    if(&m == this)
+Model &Model::operator=(const Model &m)
+{
+    // Verify if the object is the same
+    if (&m == this)
         return *this;
 
     name = m.name;
 
-    // Delete and clear the systems
-    for(System* s : systems){
-        delete s;
-    }
+    // Clear the systems vector
     systems.clear();
 
-    // Make a deep copy of the systems
-    for (auto it = m.systems.begin(); it != m.systems.end(); ++it){
-        System *s = new System(**it);
-        systems.push_back(s);
+    for (auto it = m.systems.begin(); it != m.systems.end(); ++it)
+    {
+        systems.push_back(&(**it));
     }
 
-    // Delete and clear the flows    
-    for(Flow* f : flows){
-        delete f;
-    }
+    // Clear the flows vector
     flows.clear();
-
-    // Make a deep copy of the flows
-    for (auto it = m.flows.begin(); it != m.flows.end(); ++it){
-        flows.push_back((*it)->create());
+    for (auto it = m.flows.begin(); it != m.flows.end(); ++it)
+    {
+        flows.push_back(&(**it));
     }
 
     return *this;
 }
-*/
-void Model::setName(const string &name) {
+
+void Model::setName(const string &name)
+{
     this->name = name;
 }
 
-void Model::add(System *system) {
+void Model::add(System *system)
+{
     systems.push_back(system);
 }
 
-void Model::add(Flow *flow) {
+void Model::add(Flow *flow)
+{
     flows.push_back(flow);
 }
 
-void Model::printSystems() {
+
+void Model::printSystems()
+{
     for (auto it = systems.begin(); it != systems.end(); ++it)
         cout << (*it)->getName() << ": " << (*it)->getAccumulatorValue() << endl;
 }
 
-
-void Model::run(int initialTime, int finalTime) {
-    
-    for (int i = initialTime; i < finalTime; i++) {
+// Run the model
+void Model::run(int initialTime, int finalTime)
+{
+    for (int i = initialTime; i < finalTime; i++)
+    {
+        // Execute the flows and salve the values
         for (auto it = flows.begin(); it != flows.end(); ++it)
             (*it)->setTransportValue((*it)->execute());
 
-        for (auto it = flows.begin(); it != flows.end(); ++it) {
+        // Update the systems
+        for (auto it = flows.begin(); it != flows.end(); ++it)
+        {
             System *input = (*it)->getSource();
             System *output = (*it)->getTarget();
 
-            if(input != nullptr)
+            // Verify null pointers to source and target
+            if (input != nullptr)
                 input->setAccumulatorValue(input->getAccumulatorValue() - (*it)->getTransportValue());
-            if(output != nullptr)
+            if (output != nullptr)
                 output->setAccumulatorValue(output->getAccumulatorValue() + (*it)->getTransportValue());
         }
-        printRun(i+1);
     }
-    // Print final values
-    //print ? printSystems() : void();
 }
 
-/*
-Model::~Model() {
-    // Delete and clear the systems
-    for(System* s : systems){
-        delete s;
-    }
+Model::~Model()
+{
     systems.clear();
-
-    // Delete and clear the flows    
-    for(Flow* f : flows){
-        delete f;
-    }
     flows.clear();
 }
-*/
 
-void Model::printRun(int time) {
+void Model::printRun(int time)
+{
     cout << "Time: " << time << endl;
-    for(auto it = flows.begin(); it != flows.end(); ++it){
+    for (auto it = flows.begin(); it != flows.end(); ++it)
+    {
         cout << (*it)->getName() << ": " << (*it)->getTransportValue() << " ";
     }
     cout << endl;
-    for(auto it = systems.begin(); it != systems.end(); ++it)
+    for (auto it = systems.begin(); it != systems.end(); ++it)
         cout << (*it)->getName() << ": " << (*it)->getAccumulatorValue() << endl;
 }
