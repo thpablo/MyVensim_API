@@ -3,10 +3,12 @@
 Flow::Flow() : name(""), source(nullptr), target(nullptr), transportValue(0.0) {}
 
 Flow::Flow(string name, System *source, System *target) : name(name), source(source), target(target), transportValue(0.0) {}
+
 Flow::Flow(const Flow &f) : name(f.name), source(f.source), target(f.target), transportValue(f.transportValue) {}
-// Sobrecarga do operador de atribuição
+
+// Overload of the assignment operator
 Flow &Flow::operator=(const Flow &f) {
-    //verifica se o objeto é o mesmo
+    // Verify if the object is the same
     if(&f == this)
         return *this;
 

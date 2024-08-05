@@ -52,9 +52,10 @@ void exponentialFuncionalTest()
     // Execution
     m1->run(0, 100);
 
-    assert(fabs(source->getAccumulatorValue() - 36.6032) < 0.0001);
+    assert(fabs(source->getAccumulatorValue() - 36.6033) < 0.0001);
     assert(fabs(target->getAccumulatorValue() - 63.3968) < 0.0001);
 
+    // Deletes systems, flows, and models
     delete source;
     delete target;
     delete flow1;

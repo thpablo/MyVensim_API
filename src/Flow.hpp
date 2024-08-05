@@ -14,7 +14,6 @@ private:
 public:
     Flow();
     Flow(string name, System *source, System *target);
-    // Copy constructor
     Flow(const Flow &f);
     Flow &operator=(const Flow &f);
 

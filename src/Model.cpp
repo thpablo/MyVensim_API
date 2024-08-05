@@ -19,7 +19,6 @@ Model::Model(const Model &m) : name(m.name)
 
     // Clear the flows vector
     flows.clear();
-
     for (auto it = m.flows.begin(); it != m.flows.end(); ++it)
     {
         add(&(**it));

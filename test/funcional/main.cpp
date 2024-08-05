@@ -11,7 +11,7 @@ int main(){
 
     complexFuncionalTest();
 
-    return true;
+    return 0;
 }
 
 #endif

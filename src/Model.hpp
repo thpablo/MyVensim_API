@@ -15,33 +15,24 @@ private:
     vector<Flow *> flows;
     vector<System *> systems;
     string name;
-    Model(const Model &m);
-    Model &operator=(const Model &m);
 
 public:
     Model();
     Model(string name);
+    Model(const Model &m);
+    Model &operator=(const Model &m);
 
     void setName(const string &name);
     void add(System *system);
     void add(Flow *flow);
 
-    void getSystems();
-
     void run(int initialTime, int finalTime);
     
-    virtual ~Model(){
-        systems.clear();
-        flows.clear();
-    }
+    virtual ~Model();
 
-
-
+    // Auxiliar functions
     void printRun(int time);
     void printSystems();
-
-
-
 };
 
 #endif // MODELO_H
