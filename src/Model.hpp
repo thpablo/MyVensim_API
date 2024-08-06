@@ -19,9 +19,10 @@ private:
 public:
     Model();
     Model(string name);
+private:
     Model(const Model &m);
     Model &operator=(const Model &m);
-
+public:
     void setName(const string &name);
     void add(System *system);
     void add(Flow *flow);

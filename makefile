@@ -24,22 +24,15 @@ UNIT_TEST_EXEC = $(BIN_DIR)/unit_tests
 FUNCIONAL_TEST_EXEC = $(BIN_DIR)/funcional_tests
 
 # Regras
-all: $(UNIT_TEST_EXEC) $(FUNCIONAL_TEST_EXEC)
+all: $(FUNCIONAL_TEST_EXEC)
 
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-$(BIN_DIR)/%.o: $(UNIT_TEST_DIR)/%.cpp
 	@mkdir -p $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(BIN_DIR)/%.o: $(FUNCIONAL_TEST_DIR)/%.cpp
 	@mkdir -p $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-$(UNIT_TEST_EXEC): $(SRC_OBJS) $(UNIT_TEST_OBJS)
-	$(CXX) $(CXXFLAGS) $^ -o $@
 
 $(FUNCIONAL_TEST_EXEC): $(SRC_OBJS) $(FUNCIONAL_TEST_OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $@

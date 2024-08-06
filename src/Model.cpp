@@ -39,14 +39,14 @@ Model &Model::operator=(const Model &m)
 
     for (auto it = m.systems.begin(); it != m.systems.end(); ++it)
     {
-        systems.push_back(&(**it));
+        add(&(**it));
     }
 
     // Clear the flows vector
     flows.clear();
     for (auto it = m.flows.begin(); it != m.flows.end(); ++it)
     {
-        flows.push_back(&(**it));
+        add(&(**it));
     }
 
     return *this;
