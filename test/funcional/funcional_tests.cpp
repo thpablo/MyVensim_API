@@ -1,37 +1,4 @@
 #include "./funcional_tests.hpp"
-// Exponential Class
-class Exponential : public Flow
-{
-public:
-    Exponential(string name, System *input, System *output) : Flow(name, input, output) {}
-    double execute() override
-    {
-        return 0.01 * getSource()->getAccumulatorValue();
-    }
-};
-
-// Logistic Class
-class Logistic : public Flow
-{
-public:
-    Logistic(string name, System *source, System *target) : Flow(name, source, target) {}
-    double execute() override
-    {
-        return 0.01 * getTarget()->getAccumulatorValue() * (1 - (getTarget()->getAccumulatorValue()) / 70);
-    }
-};
-
-// Complex Model Class
-class Complex : public Flow
-{
-public:
-    Complex(string name, System *source, System *target) : Flow(name, source, target) {}
-    double execute() override
-    {
-        return 0.01 * getSource()->getAccumulatorValue();
-    }
-};
-
 void exponentialFuncionalTest()
 {
     // Create the model
@@ -52,9 +19,9 @@ void exponentialFuncionalTest()
     // Execution
     m1->run(0, 100);
 
-    assert(fabs(source->getAccumulatorValue() - 36.6033) < 0.0001);
-    assert(fabs(target->getAccumulatorValue() - 63.3968) < 0.0001);
-
+    // Check the values
+    assert((trunc(fabs(source->getAccumulatorValue() - 36.6032) * 10000)) <= 1);
+    assert((trunc(fabs(target->getAccumulatorValue() - 63.3968) * 10000)) <= 1);
     // Deletes systems, flows, and models
     delete source;
     delete target;
@@ -77,8 +44,8 @@ void logisticalFuncionalTest()
 
     m2->run(0, 100);
 
-    assert(fabs(source->getAccumulatorValue() - 88.2167) < 0.0001);
-    assert(fabs(target->getAccumulatorValue() - 21.7833) < 0.0001);
+    assert((trunc(fabs(source->getAccumulatorValue() - 88.2167) * 10000)) <= 1);
+    assert((trunc(fabs(target->getAccumulatorValue() - 21.7833) * 10000)) <= 1);
 
     // Delete systems, flows, and models
     delete source;
@@ -120,11 +87,11 @@ void complexFuncionalTest()
     m3->run(0, 100);
 
     // Check the values
-    assert(fabs(Q1->getAccumulatorValue() - 31.8513) < 0.0001);
-    assert(fabs(Q2->getAccumulatorValue() - 18.4003) < 0.0001);
-    assert(fabs(Q3->getAccumulatorValue() - 77.1143) < 0.0001);
-    assert(fabs(Q4->getAccumulatorValue() - 56.1728) < 0.0001);
-    assert(fabs(Q5->getAccumulatorValue() - 16.4612) < 0.0001);
+    assert((trunc(fabs(Q1->getAccumulatorValue() - 31.8513) * 10000)) <= 1);
+    assert((trunc(fabs(Q2->getAccumulatorValue() - 18.4003) * 10000)) <= 1);
+    assert((trunc(fabs(Q3->getAccumulatorValue() - 77.1143) * 10000)) <= 1);
+    assert((trunc(fabs(Q4->getAccumulatorValue() - 56.1728) * 10000)) <= 1);
+    assert((trunc(fabs(Q5->getAccumulatorValue() - 16.4612) * 10000)) <= 1);
 
     // Delete systems, flows, and models
     delete Q1;

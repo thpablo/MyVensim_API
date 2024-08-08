@@ -25,7 +25,6 @@ public:
     double getAccumulatorValue() const;
 
     virtual ~System();
-
 };
 
 #endif // SYSTEM_H

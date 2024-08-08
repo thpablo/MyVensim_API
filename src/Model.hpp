@@ -19,21 +19,18 @@ private:
 public:
     Model();
     Model(string name);
+
 private:
     Model(const Model &m);
     Model &operator=(const Model &m);
+
 public:
     void setName(const string &name);
     void add(System *system);
     void add(Flow *flow);
-
     void run(int initialTime, int finalTime);
     
     virtual ~Model();
-
-    // Auxiliar functions
-    void printRun(int time);
-    void printSystems();
 };
 
 #endif // MODELO_H

@@ -11,18 +11,14 @@ Model::Model(const Model &m) : name(m.name)
 {
     // Clear the systems vector
     systems.clear();
-
+    
     for (auto it = m.systems.begin(); it != m.systems.end(); ++it)
-    {
         add(&(**it));
-    }
-
     // Clear the flows vector
     flows.clear();
+
     for (auto it = m.flows.begin(); it != m.flows.end(); ++it)
-    {
         add(&(**it));
-    }
 }
 
 // Overload of the assignment operator
@@ -33,21 +29,17 @@ Model &Model::operator=(const Model &m)
         return *this;
 
     name = m.name;
-
     // Clear the systems vector
     systems.clear();
 
     for (auto it = m.systems.begin(); it != m.systems.end(); ++it)
-    {
         add(&(**it));
-    }
 
     // Clear the flows vector
     flows.clear();
+
     for (auto it = m.flows.begin(); it != m.flows.end(); ++it)
-    {
         add(&(**it));
-    }
 
     return *this;
 }
@@ -67,13 +59,6 @@ void Model::add(Flow *flow)
     flows.push_back(flow);
 }
 
-
-void Model::printSystems()
-{
-    for (auto it = systems.begin(); it != systems.end(); ++it)
-        cout << (*it)->getName() << ": " << (*it)->getAccumulatorValue() << endl;
-}
-
 // Run the model
 void Model::run(int initialTime, int finalTime)
 {
@@ -86,14 +71,14 @@ void Model::run(int initialTime, int finalTime)
         // Update the systems
         for (auto it = flows.begin(); it != flows.end(); ++it)
         {
-            System *input = (*it)->getSource();
-            System *output = (*it)->getTarget();
+            System *tempSource = (*it)->getSource();
+            System *tempTarget = (*it)->getTarget();
 
             // Verify null pointers to source and target
-            if (input != nullptr)
-                input->setAccumulatorValue(input->getAccumulatorValue() - (*it)->getTransportValue());
-            if (output != nullptr)
-                output->setAccumulatorValue(output->getAccumulatorValue() + (*it)->getTransportValue());
+            if (tempSource != nullptr)
+                tempSource->setAccumulatorValue(tempSource->getAccumulatorValue() - (*it)->getTransportValue());
+            if (tempTarget != nullptr)
+                tempTarget->setAccumulatorValue(tempTarget->getAccumulatorValue() + (*it)->getTransportValue());
         }
     }
 }
@@ -102,16 +87,4 @@ Model::~Model()
 {
     systems.clear();
     flows.clear();
-}
-
-void Model::printRun(int time)
-{
-    cout << "Time: " << time << endl;
-    for (auto it = flows.begin(); it != flows.end(); ++it)
-    {
-        cout << (*it)->getName() << ": " << (*it)->getTransportValue() << " ";
-    }
-    cout << endl;
-    for (auto it = systems.begin(); it != systems.end(); ++it)
-        cout << (*it)->getName() << ": " << (*it)->getAccumulatorValue() << endl;
 }
