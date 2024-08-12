@@ -10,7 +10,10 @@ using namespace std;
 #include "../../src/Flow.hpp"
 #include "../../src/Model.hpp"
 
-// Exponential Class
+/**
+ * @brief This class represents a exponential flow in the system dynamics model.
+ * 
+ */
 class Exponential : public Flow
 {
 public:
@@ -21,7 +24,9 @@ public:
     }
 };
 
-// Logistic Class
+/** 
+ * @brief This class represents a logistic flow in the system dynamics model.
+ */
 class Logistic : public Flow
 {
 public:
@@ -32,7 +37,10 @@ public:
     }
 };
 
-// Complex Model Class
+/**
+ * @brief This class represents a complex flow in the system dynamics model.
+ * 
+ */
 class Complex : public Flow
 {
 public:
@@ -43,8 +51,21 @@ public:
     }
 };
 
+/**
+ * @brief Functional tests for the exponential flow.
+ * 
+ */
 void exponentialFuncionalTest();
+
+/**
+ * @brief Logistic functional tests.
+ * 
+ */
 void logisticalFuncionalTest();
+/**
+ * @brief Complex functional tests.
+ * 
+ */
 void complexFuncionalTest();
 
 #endif //FUNCIONAL_TESTS_H

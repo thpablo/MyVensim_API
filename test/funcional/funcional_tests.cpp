@@ -20,8 +20,9 @@ void exponentialFuncionalTest()
     m1->run(0, 100);
 
     // Check the values
-    assert((trunc(fabs(source->getAccumulatorValue() - 36.6032) * 10000)) <= 1);
-    assert((trunc(fabs(target->getAccumulatorValue() - 63.3968) * 10000)) <= 1);
+    assert(fabs(round((source->getAccumulatorValue() * 10000) - (36.6032 * 10000))) < 1);
+    assert(fabs(round((target->getAccumulatorValue() * 10000) - (63.3968 * 10000))) < 1);
+
     // Deletes systems, flows, and models
     delete source;
     delete target;
@@ -44,8 +45,8 @@ void logisticalFuncionalTest()
 
     m2->run(0, 100);
 
-    assert((trunc(fabs(source->getAccumulatorValue() - 88.2167) * 10000)) <= 1);
-    assert((trunc(fabs(target->getAccumulatorValue() - 21.7833) * 10000)) <= 1);
+    assert(fabs(round((source->getAccumulatorValue() * 10000) - (88.2167 * 10000))) < 1);
+    assert(fabs(round((target->getAccumulatorValue() * 10000) - (21.7833 * 10000))) < 1);
 
     // Delete systems, flows, and models
     delete source;
@@ -87,11 +88,11 @@ void complexFuncionalTest()
     m3->run(0, 100);
 
     // Check the values
-    assert((trunc(fabs(Q1->getAccumulatorValue() - 31.8513) * 10000)) <= 1);
-    assert((trunc(fabs(Q2->getAccumulatorValue() - 18.4003) * 10000)) <= 1);
-    assert((trunc(fabs(Q3->getAccumulatorValue() - 77.1143) * 10000)) <= 1);
-    assert((trunc(fabs(Q4->getAccumulatorValue() - 56.1728) * 10000)) <= 1);
-    assert((trunc(fabs(Q5->getAccumulatorValue() - 16.4612) * 10000)) <= 1);
+    assert(fabs(round((Q1->getAccumulatorValue() * 10000) - (31.8513 * 10000))) < 1);
+    assert(fabs(round((Q2->getAccumulatorValue() * 10000) - (18.4003 * 10000))) < 1);
+    assert(fabs(round((Q3->getAccumulatorValue() * 10000) - (77.1143 * 10000))) < 1);
+    assert(fabs(round((Q4->getAccumulatorValue() * 10000) - (56.1728 * 10000))) < 1);
+    assert(fabs(round((Q5->getAccumulatorValue() * 10000) - (16.4612 * 10000))) < 1);
 
     // Delete systems, flows, and models
     delete Q1;
