@@ -23,14 +23,14 @@ public:
 /**
  * @brief Construct a new System object with name
  * 
- * @param name 
+ * @param name name of the system
  */
     System(string name);
 /**
  * @brief Construct a new System object with a name and initial value
  * 
- * @param name 
- * @param value 
+ * @param name name of the system
+ * @param value initial value to the accumulator
  */
     System(string name, double value);
 /**
@@ -40,30 +40,28 @@ public:
  */
     System(const System &s);
 
-    System &operator=(const System &s);
-
     /**
      * @brief Set the Name object
      * 
-     * @param name 
+     * @param name name of the system
      */
     void setName(const string &name);
     /**
      * @brief Get the Name object
      * 
-     * @return string 
+     * @return name of the system
      */
     string getName() const;
     /**
      * @brief Set the Accumulator Value object
      * 
-     * @param value 
+     * @param value a value to set the accumulator
      */
     void setAccumulatorValue(double value);
     /**
      * @brief Get the Accumulator Value object
      * 
-     * @return double 
+     * @return the value of the accumulator
      */
     double getAccumulatorValue() const;
 
@@ -73,14 +71,25 @@ public:
      */
     virtual ~System();
 
+    /**
+     * @brief Construct a new System object
+     * 
+     * @param name name of the system
+     */
     System(const System &s);
 
+    /**
+     * @brief Overload of the assignment operator
+     * 
+     * @param s another system object
+     * @return A copy of the system object
+     */
     System &operator=(const System &s);
 
     /**
      * @brief Set the Name object
      * 
-     * @param name 
+     * @param name name to the system
      */
     void setName(const string &name);
     /**
@@ -92,16 +101,20 @@ public:
     /**
      * @brief Set the Accumulator Value object
      * 
-     * @param value 
+     * @param value value to set the accumulator
      */
     void setAccumulatorValue(double value);
     /**
      * @brief Get the Accumulator Value object
      * 
-     * @return double 
+     * @return value of the accumulator
      */
     double getAccumulatorValue() const;
 
+    /**
+     * @brief Destroy the System object
+     * 
+     */
     virtual ~System();
 };
 

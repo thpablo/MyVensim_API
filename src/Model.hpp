@@ -28,7 +28,7 @@ public:
 /**
  * @brief Construct a new Model object with a name
  * 
- * @param name 
+ * @param name name to the model
  */
     Model(string name);
 
@@ -40,7 +40,7 @@ public:
     /**
      * @brief Set the Name of model
      * 
-     * @param name 
+     * @param name name to the model
      */
     void setName(const string &name);
     /**

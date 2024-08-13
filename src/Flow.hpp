@@ -16,9 +16,30 @@ private:
     double transportValue;
 
 public:
+    /**
+     * @brief Construct a new Flow object
+     * 
+     */
     Flow();
+    /**
+     * @brief Construct a new Flow object
+     * 
+     * @param name name to the flow
+     * @param source reference to the source system
+     * @param target reference to the target system
+     */
     Flow(string name, System *source, System *target);
+    /**
+     * @brief Construct a new Flow object
+     * 
+     * @param name name to the flow
+     */
     Flow(const Flow &f);
+    /**
+     * @brief Construct a new Flow object
+     * 
+     * @param name name to the flow
+     */
     Flow &operator=(const Flow &f);
 
     /**
@@ -30,14 +51,13 @@ public:
     /**
      * @brief Get the Name of the flow
      * 
-     * @return string 
+     * @return name of the flow
      */
     string getName() const;
     /**
      * @brief Set the System object that represents the source of the flux
      * 
      * @param source System object reference
-     * @return * void 
      */
     void setSource(System *source);
     /**
@@ -50,26 +70,26 @@ public:
     /**
      * @brief Get the Source System object reference
      * 
-     * @return System* 
+     * @return the source system object reference
      */
     System *getSource() const;
     /**
      * @brief Get the Target System object reference
      * 
-     * @return System* 
+     * @return the target system object reference
      */
     System *getTarget() const;
 
     /**
      * @brief Set the Transport Value object
      * 
-     * @param value 
+     * @param value a value to transport in the flow
      */
     void setTransportValue(double value);
     /**
      * @brief Get the Transport Value object
      * 
-     * @return double 
+     * @return the value of the transport
      */
     double getTransportValue() const;
 
@@ -79,6 +99,10 @@ public:
      * @return double Value of the flow
      */
     virtual double execute() = 0;
+    /**
+     * @brief Destroy the Flow object
+     * 
+     */
     virtual ~Flow();
 };
 
