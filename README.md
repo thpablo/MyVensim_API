@@ -6,7 +6,7 @@ API built for the Software Engineering I course at the Federal University of Our
 
 ## Structure
 ### UML
-![UML Diagram](./src/images/diagram.png)
+![UML Diagram](./doc/images/diagram.png)
 
 ## Dependencies
 - Gcc or another compiler for c++

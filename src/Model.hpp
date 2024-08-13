@@ -20,7 +20,16 @@ private:
     string name;
 
 public:
+/**
+ * @brief Construct a new Model object
+ * 
+ */
     Model();
+/**
+ * @brief Construct a new Model object with a name
+ * 
+ * @param name 
+ */
     Model(string name);
 
 private:
@@ -54,6 +63,10 @@ public:
      */
     void run(int initialTime, int finalTime);
     
+    /**
+     * @brief Destroy the Model object
+     * 
+     */
     virtual ~Model();
 };
 
