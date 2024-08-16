@@ -2,12 +2,13 @@
 #define COMPLEX_HPP
 
 #include "../../src/Flow.hpp"
+#include "../../src/FlowImplementation.hpp"
 
 /**
  * @brief This class represents a complex flow in the system dynamics model.
  * 
  */
-class Complex : public Flow
+class Complex : public FlowImplementation
 {
 public:
     /**

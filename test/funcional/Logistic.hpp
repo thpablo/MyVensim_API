@@ -2,11 +2,12 @@
 #define LOGISTIC_HPP
 
 #include "../../src/Flow.hpp"
+#include "../../src/FlowImplementation.hpp"
 
 /** 
  * @brief This class represents a logistic flow in the system dynamics model.
 */
-class Logistic : public Flow
+class Logistic : public FlowImplementation
 {
 public:
     /**

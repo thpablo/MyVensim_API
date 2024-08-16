@@ -1,7 +1,6 @@
 #include "Exponential.hpp"
 
-Exponential::Exponential(string name, System *input, System *output)
-    : Flow(name, input, output) {}
+Exponential::Exponential(string name, System *input, System *output): FlowImplementation(name, input, output) {}
 
 double Exponential::execute()
 {

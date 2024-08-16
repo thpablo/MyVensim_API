@@ -2,11 +2,12 @@
 #define EXPONENTIAL_HPP
 
 #include "../../src/Flow.hpp"
+#include "../../src/FlowImplementation.hpp"
 /**
  * @brief This class represents a exponential flow in the system dynamics model.
  * 
  */
-class Exponential : public Flow
+class Exponential : public FlowImplementation
 {
 public:
     /**

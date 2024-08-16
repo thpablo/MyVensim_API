@@ -9,101 +9,77 @@
  */
 class Flow
 {
-private:
-    string name;
-    System *source;
-    System *target;
-    double transportValue;
-
 public:
     /**
-     * @brief Construct a new Flow object
-     * 
-     */
-    Flow();
-    /**
-     * @brief Construct a new Flow object
-     * 
-     * @param name name to the flow
-     * @param source reference to the source system
-     * @param target reference to the target system
-     */
-    Flow(string name, System *source, System *target);
-    /**
-     * @brief Construct a new Flow object
-     * 
-     * @param name name to the flow
-     */
-    Flow(const Flow &f);
-    /**
-     * @brief Construct a new Flow object
-     * 
-     * @param name name to the flow
-     */
-    Flow &operator=(const Flow &f);
-
-    /**
-     * @brief Set the Name of the flow
+     * @brief Set the Name of the Flow
      * 
      * @param name 
      */
-    void setName(const string &name);
+    virtual void setName(const string &name) = 0;
     /**
-     * @brief Get the Name of the flow
+     * @brief Get the Name of the Flow
      * 
-     * @return name of the flow
+     * @return name of the Flow
      */
-    string getName() const;
+    virtual string getName() const = 0;
     /**
      * @brief Set the System object that represents the source of the flux
      * 
      * @param source System object reference
      */
-    void setSource(System *source);
+    virtual void setSource(System *source) = 0;
     /**
      * @brief Set the System object that represents the final target of the flux
      * 
      * @param target System object reference
      */
-    void setTarget(System *target);
+    virtual void setTarget(System *target) = 0;
 
     /**
      * @brief Get the Source System object reference
      * 
      * @return the source system object reference
      */
-    System *getSource() const;
+    virtual System *getSource() const = 0;
     /**
      * @brief Get the Target System object reference
      * 
      * @return the target system object reference
      */
-    System *getTarget() const;
+    virtual System *getTarget() const = 0;
 
     /**
      * @brief Set the Transport Value object
      * 
-     * @param value a value to transport in the flow
+     * @param value a value to transport in the Flow
      */
-    void setTransportValue(double value);
+    virtual void setTransportValue(double value) = 0;
     /**
      * @brief Get the Transport Value object
      * 
      * @return the value of the transport
      */
-    double getTransportValue() const;
+    virtual double getTransportValue() const = 0;
 
     /**
-     * @brief Abstract method that represents the equation of the flow
+     * @brief Abstract method that represents the equation of the Flow
      * 
-     * @return double Value of the flow
+     * @return double Value of the Flow
      */
     virtual double execute() = 0;
     /**
      * @brief Destroy the Flow object
      * 
      */
-    virtual ~Flow();
+    virtual ~Flow(){};
+
+    /**
+     * @brief Overload of the assignment operator
+     * 
+     * @param f another flow object
+     * @return a copy of the flow object
+     */
+    virtual Flow &operator=(const Flow &f) = 0;
 };
 
 #endif // FLOW_H

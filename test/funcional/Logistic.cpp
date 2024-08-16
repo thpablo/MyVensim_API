@@ -1,7 +1,6 @@
 #include "Logistic.hpp"
 
-Logistic::Logistic(string name, System *source, System *target)
-    : Flow(name, source, target) {}
+Logistic::Logistic(string name, System *source, System *target): FlowImplementation(name, source, target) {}
 
 double Logistic::execute()
 {

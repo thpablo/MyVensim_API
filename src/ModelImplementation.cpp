@@ -1,13 +1,14 @@
-#include "./Model.hpp"
-
+#include "./ModelImplementation.hpp"
+#include <iostream>
+#include <math.h>
 using namespace std;
 
-Model::Model() : name("") {}
+ModelImplementation::ModelImplementation() : name("") {}
 
-Model::Model(string name) : name(name) {}
+ModelImplementation::ModelImplementation(string name) : name(name) {}
 
 // Copy constructor
-Model::Model(const Model &m) : name(m.name)
+ModelImplementation::ModelImplementation(const ModelImplementation &m) : name(m.name)
 {
     // Clear the systems vector
     systems.clear();
@@ -22,7 +23,7 @@ Model::Model(const Model &m) : name(m.name)
 }
 
 // Overload of the assignment operator
-Model &Model::operator=(const Model &m)
+ModelImplementation &ModelImplementation::operator=(const ModelImplementation &m)
 {
     // Verify if the object is the same
     if (&m == this)
@@ -44,23 +45,28 @@ Model &Model::operator=(const Model &m)
     return *this;
 }
 
-void Model::setName(const string &name)
+string ModelImplementation::getName() const
+{
+    return name;
+}
+
+void ModelImplementation::setName(const string &name)
 {
     this->name = name;
 }
 
-void Model::add(System *system)
+void ModelImplementation::add(System *system)
 {
     systems.push_back(system);
 }
 
-void Model::add(Flow *flow)
+void ModelImplementation::add(Flow *flow)
 {
     flows.push_back(flow);
 }
 
-// Run the model
-void Model::run(int initialTime, int finalTime)
+// Run the modelImplementation
+void ModelImplementation::run(int initialTime, int finalTime)
 {
     for (int i = initialTime; i < finalTime; i++)
     {
@@ -83,7 +89,7 @@ void Model::run(int initialTime, int finalTime)
     }
 }
 
-Model::~Model()
+ModelImplementation::~ModelImplementation()
 {
     systems.clear();
     flows.clear();

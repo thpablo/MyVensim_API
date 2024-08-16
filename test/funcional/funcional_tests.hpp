@@ -7,7 +7,16 @@
 #include "Complex.hpp"
 #include "Exponential.hpp"
 #include "Logistic.hpp"
+
+/** ????? */
+#include "../../src/System.hpp"
+#include "../../src/Flow.hpp"
 #include "../../src/Model.hpp"
+
+#include "../../src/SystemImplementation.hpp"
+#include "../../src/FlowImplementation.hpp"
+#include "../../src/ModelImplementation.hpp"
+
 
 using namespace std;
 

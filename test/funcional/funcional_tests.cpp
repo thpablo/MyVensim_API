@@ -2,11 +2,11 @@
 void exponentialFuncionalTest()
 {
     // Create the model
-    Model *m1 = new Model("Model 1");
+    Model* m1 = new ModelImplementation("Model 1");
 
     // Add systems
-    System *source = new System("POP 1", 100);
-    System *target = new System("POP 2", 0);
+    System *source = new SystemImplementation("POP 1", 100);
+    System *target = new SystemImplementation("POP 2", 0);
 
     // Add systems and flows
     Flow *flow1 = new Exponential("exponential", source, target);
@@ -32,10 +32,10 @@ void exponentialFuncionalTest()
 void logisticalFuncionalTest()
 {
     // Create the model
-    Model *m2 = new Model("Model 2");
+    Model* m2 = new ModelImplementation("Model 2");
 
-    System *source = new System("p1", 100);
-    System *target = new System("p2", 10);
+    System *source = new SystemImplementation("p1", 100);
+    System *target = new SystemImplementation("p2", 10);
 
     Flow *flow2 = new Logistic("logistic", source, target);
 
@@ -57,11 +57,11 @@ void logisticalFuncionalTest()
 
 void complexFuncionalTest()
 {
-    System *Q1 = new System("Q1", 100);
-    System *Q2 = new System("Q2", 0);
-    System *Q3 = new System("Q3", 100);
-    System *Q4 = new System("Q4", 0);
-    System *Q5 = new System("Q5", 0);
+    System *Q1 = new SystemImplementation("Q1", 100);
+    System *Q2 = new SystemImplementation("Q2", 0);
+    System *Q3 = new SystemImplementation("Q3", 100);
+    System *Q4 = new SystemImplementation("Q4", 0);
+    System *Q5 = new SystemImplementation("Q5", 0);
 
     Flow *f = new Complex("F", Q1, Q2);
     Flow *g = new Complex("G", Q1, Q3);
@@ -70,7 +70,7 @@ void complexFuncionalTest()
     Flow *u = new Complex("U", Q3, Q4);
     Flow *v = new Complex("V", Q4, Q1);
 
-    Model *m3 = new Model("Model 3");
+    Model *m3 = new ModelImplementation("Model 3");
 
     // add Systems and Flows
     m3->add(Q1);
