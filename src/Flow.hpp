@@ -13,7 +13,7 @@ public:
     /**
      * @brief Set the Name of the Flow
      * 
-     * @param name 
+     * @param name name of the Flow
      */
     virtual void setName(const string &name) = 0;
     /**
@@ -67,19 +67,24 @@ public:
      * @return double Value of the Flow
      */
     virtual double execute() = 0;
+
+    /**
+     * @brief Friend class to unit tests
+     * 
+     */
+    friend class UnitFlow;
+
+    /**
+     * @brief Overload of the assignment operator
+     * 
+     * @return a copy of the flow object
+     */
+    virtual Flow &operator=(const Flow &f) = 0;
     /**
      * @brief Destroy the Flow object
      * 
      */
     virtual ~Flow(){};
-
-    /**
-     * @brief Overload of the assignment operator
-     * 
-     * @param f another flow object
-     * @return a copy of the flow object
-     */
-    virtual Flow &operator=(const Flow &f) = 0;
 };
 
 #endif // FLOW_H

@@ -1,43 +1,43 @@
 # Diretórios
 SRC_DIR = src
-TEST_DIR = test
+UNIT_TEST_DIR = test/unit
+FUNC_TEST_DIR = test/funcional
 BIN_DIR = bin
-UNIT_TEST_DIR = $(TEST_DIR)/unit
-FUNCIONAL_TEST_DIR = $(TEST_DIR)/funcional
 
 # Compilador e flags
-CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++11
+CC = g++
+CFLAGS = -Wall -Wextra -I$(SRC_DIR)
 
-# Arquivos fontes
+# Arquivos fonte e objetos
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
-UNIT_TEST_FILES = $(wildcard $(UNIT_TEST_DIR)/*.cpp)
-FUNCIONAL_TEST_FILES = $(wildcard $(FUNCIONAL_TEST_DIR)/*.cpp)
-
-# Arquivos objetos
 SRC_OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(BIN_DIR)/%.o, $(SRC_FILES))
-UNIT_TEST_OBJS = $(patsubst $(UNIT_TEST_DIR)/%.cpp, $(BIN_DIR)/%.o, $(UNIT_TEST_FILES))
-FUNCIONAL_TEST_OBJS = $(patsubst $(FUNCIONAL_TEST_DIR)/%.cpp, $(BIN_DIR)/%.o, $(FUNCIONAL_TEST_FILES))
 
-# Executáveis
-UNIT_TEST_EXEC = $(BIN_DIR)/unit_tests
-FUNCIONAL_TEST_EXEC = $(BIN_DIR)/funcional_tests
+UNIT_FILES = $(wildcard $(UNIT_TEST_DIR)/*.cpp)
+UNIT_OBJS = $(patsubst $(UNIT_TEST_DIR)/%.cpp, $(BIN_DIR)/unit_%.o, $(UNIT_FILES))
 
-# Regras
-all: $(FUNCIONAL_TEST_EXEC)
+FUNC_FILES = $(wildcard $(FUNC_TEST_DIR)/*.cpp)
+FUNC_OBJS = $(patsubst $(FUNC_TEST_DIR)/%.cpp, $(BIN_DIR)/funcional_%.o, $(FUNC_FILES))
 
+# Target padrão
+all: $(BIN_DIR)/unit_tests $(BIN_DIR)/funcional_tests
+
+# Compilando binários
+$(BIN_DIR)/unit_tests: $(SRC_OBJS) $(UNIT_OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+$(BIN_DIR)/funcional_tests: $(SRC_OBJS) $(FUNC_OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# Compilando objetos das fontes
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BIN_DIR)/%.o: $(FUNCIONAL_TEST_DIR)/%.cpp
-	@mkdir -p $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+$(BIN_DIR)/unit_%.o: $(UNIT_TEST_DIR)/%.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(FUNCIONAL_TEST_EXEC): $(SRC_OBJS) $(FUNCIONAL_TEST_OBJS)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+$(BIN_DIR)/funcional_%.o: $(FUNC_TEST_DIR)/%.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
 
+# Limpeza
 clean:
-	rm -rf $(BIN_DIR)/*.o $(UNIT_TEST_EXEC) $(FUNCIONAL_TEST_EXEC)
-
-.PHONY: all clean
+	rm -f $(BIN_DIR)/*.o $(BIN_DIR)/unit_tests $(BIN_DIR)/funcional_tests

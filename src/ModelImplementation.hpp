@@ -1,12 +1,11 @@
-#ifndef MODELOImplementation_H
-#define MODELOImplementation_H
+#ifndef MODELIMPLEMENTATION_H
+#define MODELIMPLEMENTATION_H
 
 #include "./Flow.hpp"
 #include "./System.hpp"
 #include "./Model.hpp"
 #include <vector>
 using namespace std;
-
 /**
  * @brief Class ModelImplementation represents the model with different systems and flows
  */
@@ -16,7 +15,7 @@ private:
     vector<Flow *> flows;
     vector<System *> systems;
     string name;
-
+    int currentTime;
 public:
     /**
      * @brief Construct a new ModelImplementation object
@@ -50,6 +49,7 @@ public:
      *
      * @param system System object
      */
+    int getCurrentTime() const;
     void add(System *system);
     /**
      * @brief Add a single System to the model
@@ -57,6 +57,48 @@ public:
      * @param flow Flow object
      */
     void add(Flow *flow);
+
+
+    /**
+     * @brief Get the System begin object
+     * 
+     * @return reference to first system in collection 
+     */
+    itSystem getSystem();
+
+    /**
+     * @brief Get the Flow begin object
+     * 
+     * @return reference to first Flow in collection 
+     */
+    itFlow getFlow();
+
+    /**
+     * @brief Get the System object by name
+     * 
+     * @return reference to first system finds by name
+     */
+    itSystem getSystem(string name);
+    /**
+     * @brief Get the flow object by name
+     * 
+     * @return reference to first flow finds by name
+     */
+    itFlow getFlow(string name);
+
+    /**
+     * @brief Get the Systems size
+     * 
+     * @return number of systems in model
+     */
+    int getSystemsSize();
+
+    /**
+     * @brief Get the flows size
+     * 
+     * @return number of flows in model
+     */
+    int getFlowsSize();
     /**
      * @brief Run the model, processing and calculating the values of all the systems
      *
@@ -72,4 +114,4 @@ public:
     virtual ~ModelImplementation();
 };
 
-#endif // MODELOImplementation_H
+#endif // MODELIMPLEMENTATION

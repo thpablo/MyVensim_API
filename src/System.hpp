@@ -1,6 +1,7 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 #include <string>
+
 using namespace std;
 
 /**
@@ -12,8 +13,8 @@ class System
 public:
    /**
     * @brief Set the Name object
-    * 
-    * @param name 
+    *
+    * @param name
     */
    virtual void setName(const string &name) = 0;
    /**
@@ -35,11 +36,23 @@ public:
     */
    virtual double getAccumulatorValue() const = 0;
    /**
-    * @brief Destroy the System object
+    * @brief Overload of the assignment operator
+    * 
+    * @param s system object
+    * @return The system object copy
+    */
+   virtual System &operator=(const System &s) = 0;
+   /**
+    * @brief Friend class to unit tests
     * 
     */
-   virtual System& operator=(const System &s) = 0;
-   virtual ~System(){};
+   friend class UnitSystem;
+   
+   /**
+    * @brief Destroy the System object
+    *
+    */
+   virtual ~System() {};
 };
 
 #endif // SYSTEM_H

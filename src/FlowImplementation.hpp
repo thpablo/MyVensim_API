@@ -23,6 +23,12 @@ public:
      */
     FlowImplementation();
     /**
+     * @brief Construct a new Flow Implementation with just a name
+     * 
+     * @param name name to the FlowImplementation
+     */
+    FlowImplementation(string name);
+    /**
      * @brief Construct a new FlowImplementation object
      * 
      * @param name name to the FlowImplementation
@@ -30,11 +36,13 @@ public:
      * @param target reference to the target system
      */
     FlowImplementation(string name, System *source, System *target);
+
     /**
      * @brief Construct a new FlowImplementation object
      * 
      * @param name name to the FlowImplementation
      */
+
     FlowImplementation(const FlowImplementation &f);
     /**
      * @brief Construct a new FlowImplementation object
@@ -100,6 +108,8 @@ public:
      * @return double Value of the FlowImplementation
      */
     virtual double execute() = 0;
+    
+    
     /**
      * @brief Destroy the FlowImplementation object
      * 

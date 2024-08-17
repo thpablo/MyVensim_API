@@ -8,7 +8,6 @@
 #include "Exponential.hpp"
 #include "Logistic.hpp"
 
-/** ????? */
 #include "../../src/System.hpp"
 #include "../../src/Flow.hpp"
 #include "../../src/Model.hpp"

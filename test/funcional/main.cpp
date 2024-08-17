@@ -2,6 +2,7 @@
 #define MAIN_FUNCIONAL_TESTS
 
 #include "./funcional_tests.hpp"
+#include <iostream>
 
 int main(){
     exponentialFuncionalTest();
@@ -9,6 +10,8 @@ int main(){
     logisticalFuncionalTest();
 
     complexFuncionalTest();
+
+    std::cout << "All tests passed!" << std::endl;
 
     return 0;
 }
