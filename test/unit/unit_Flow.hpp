@@ -7,7 +7,6 @@
 class UnitFlow
 {
 public:
-    //bool unit_Flow_constructor();
     bool unit_getName();
     bool unit_setName();
     bool unit_getSource();

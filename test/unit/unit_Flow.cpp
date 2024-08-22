@@ -6,6 +6,7 @@
 
 class FlowToTests : public FlowImplementation{
     public:
+    FlowToTests() : FlowImplementation() {}
     FlowToTests(const std::string& name, System* source, System* target) : FlowImplementation(name, source, target) {}
     double execute() override {
         return 1.0;
@@ -27,7 +28,7 @@ bool UnitFlow::unit_getName()
 
 bool UnitFlow::unit_setName()
 {
-    Flow * f =  new FlowToTests("Flow 1", nullptr, nullptr);
+    Flow * f =  new FlowToTests();
     f->setName("Flow 1");
     assert(f->getName() == "Flow 1");
 

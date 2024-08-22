@@ -4,7 +4,6 @@
 class UnitModel
 {
 public:
-//TESTES GETS SYSTEMS FLOWS SYSTEMS SIZE FLOWS SIZE
     bool unit_Model_constructor();
     bool unit_setName();
     bool unit_getName();
