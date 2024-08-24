@@ -23,12 +23,6 @@ public:
      */
     FlowImplementation();
     /**
-     * @brief Construct a new Flow Implementation with just a name
-     * 
-     * @param name name to the FlowImplementation
-     */
-    FlowImplementation(string name);
-    /**
      * @brief Construct a new FlowImplementation object
      * 
      * @param name name to the FlowImplementation

@@ -32,18 +32,6 @@ public:
      */
     virtual int getCurrentTime() const = 0;
     /**
-     * @brief Add a single System to the model
-     *
-     * @param system System object
-     */
-    virtual void add(System *system) = 0;
-    /**
-     * @brief Add a single System to the model
-     *
-     * @param flow Flow object
-     */
-    virtual void add(Flow *flow) = 0;
-    /**
      * @brief Get the first system
      *
      * @return iterator for the first system
@@ -101,6 +89,28 @@ public:
      *
      */
     virtual ~Model() {};
+
+    /***Sprint 5*/
+    static Model * createModel(string name); // Model is a static object Model::createModel("name");
+    
+    virtual System* createSystem(string name, double value) = 0;
+
+    // Implemented type derived from the Flow class
+    template <typename FLOW_DERIVED_TYPE>
+    Flow * createFlow(string name, System *source, System *target)
+    {
+        Flow *flow = new FLOW_DERIVED_TYPE(name, source, target);
+        add(flow);
+        return flow;
+    } //Porque implementacao no Model.h?
+    
+    virtual void add(Flow *flow) = 0;
+
+    //virtual bool deleteModel(const string &name) = 0;
+    
+    virtual bool deleteSystem(const string &name) = 0;
+    virtual bool deleteFlow(const string &name) = 0;
+
 };
 
 #endif // MODEL_H

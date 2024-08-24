@@ -12,10 +12,6 @@
 #include "../../src/Flow.hpp"
 #include "../../src/Model.hpp"
 
-#include "../../src/SystemImplementation.hpp"
-#include "../../src/FlowImplementation.hpp"
-#include "../../src/ModelImplementation.hpp"
-
 
 using namespace std;
 

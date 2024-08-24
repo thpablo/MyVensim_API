@@ -1,20 +1,16 @@
 #include "./funcional_tests.hpp"
+
 void exponentialFuncionalTest()
 {
     // Create the model
-    Model* m1 = new ModelImplementation("Model 1");
+    Model* m1 = Model::createModel("Model 1");
 
     // Add systems
-    System *source = new SystemImplementation("POP 1", 100);
-    System *target = new SystemImplementation("POP 2", 0);
+    System *source = m1->createSystem("POP 1", 100);
+    System *target = m1->createSystem("POP 2", 0);
 
     // Add systems and flows
-    Flow *flow1 = new Exponential("exponential", source, target);
-
-    // Add systems and flows to the model
-    m1->add(source);
-    m1->add(target);
-    m1->add(flow1);
+    Flow *flow1 = m1->createFlow<Exponential>("flow1", source, target);
 
     // Execution
     m1->run(0, 100);
@@ -23,68 +19,43 @@ void exponentialFuncionalTest()
     assert(fabs(round((source->getAccumulatorValue() * 10000) - (36.6032 * 10000))) < 1);
     assert(fabs(round((target->getAccumulatorValue() * 10000) - (63.3968 * 10000))) < 1);
 
-    // Deletes systems, flows, and models
-    delete source;
-    delete target;
-    delete flow1;
     delete m1;
 }
 void logisticalFuncionalTest()
 {
-    // Create the model
-    Model* m2 = new ModelImplementation("Model 2");
+    Model* m2 = Model::createModel("Model 2");
 
-    System *source = new SystemImplementation("p1", 100);
-    System *target = new SystemImplementation("p2", 10);
+    System *source = m2->createSystem("p1", 100);
+    System *target = m2->createSystem("p2", 10);
 
-    Flow *flow2 = new Logistic("logistic", source, target);
-
-    m2->add(source);
-    m2->add(target);
-    m2->add(flow2);
+    Flow *flow2 = m2->createFlow<Logistic>("flow2", source, target);
 
     m2->run(0, 100);
 
     assert(fabs(round((source->getAccumulatorValue() * 10000) - (88.2167 * 10000))) < 1);
     assert(fabs(round((target->getAccumulatorValue() * 10000) - (21.7833 * 10000))) < 1);
-
-    // Delete systems, flows, and models
-    delete source;
-    delete target;
-    delete flow2;
+    
     delete m2;
+
 }
 
 void complexFuncionalTest()
 {
-    System *Q1 = new SystemImplementation("Q1", 100);
-    System *Q2 = new SystemImplementation("Q2", 0);
-    System *Q3 = new SystemImplementation("Q3", 100);
-    System *Q4 = new SystemImplementation("Q4", 0);
-    System *Q5 = new SystemImplementation("Q5", 0);
+    Model *m3 = Model::createModel("Model 3");
 
-    Flow *f = new Complex("F", Q1, Q2);
-    Flow *g = new Complex("G", Q1, Q3);
-    Flow *r = new Complex("R", Q2, Q5);
-    Flow *t = new Complex("T", Q2, Q3);
-    Flow *u = new Complex("U", Q3, Q4);
-    Flow *v = new Complex("V", Q4, Q1);
+    System *Q1 = m3->createSystem("Q1", 100);
+    System *Q2 = m3->createSystem("Q2", 0);
+    System *Q3 = m3->createSystem("Q3", 100);
+    System *Q4 = m3->createSystem("Q4", 0);
+    System *Q5 = m3->createSystem("Q5", 0);
 
-    Model *m3 = new ModelImplementation("Model 3");
+    Flow *f = m3->createFlow<Complex>("F", Q1, Q2);
+    Flow *g = m3->createFlow<Complex>("G", Q1, Q3);
+    Flow *r = m3->createFlow<Complex>("R", Q2, Q5);
+    Flow *t = m3->createFlow<Complex>("T", Q2, Q3);
+    Flow *u = m3->createFlow<Complex>("U", Q3, Q4);
+    Flow *v = m3->createFlow<Complex>("V", Q4, Q1);
 
-    // add Systems and Flows
-    m3->add(Q1);
-    m3->add(Q2);
-    m3->add(Q3);
-    m3->add(Q4);
-    m3->add(Q5);
-
-    m3->add(f);
-    m3->add(g);
-    m3->add(r);
-    m3->add(t);
-    m3->add(u);
-    m3->add(v);
     m3->run(0, 100);
 
     // Check the values
@@ -93,20 +64,6 @@ void complexFuncionalTest()
     assert(fabs(round((Q3->getAccumulatorValue() * 10000) - (77.1143 * 10000))) < 1);
     assert(fabs(round((Q4->getAccumulatorValue() * 10000) - (56.1728 * 10000))) < 1);
     assert(fabs(round((Q5->getAccumulatorValue() * 10000) - (16.4612 * 10000))) < 1);
-
-    // Delete systems, flows, and models
-    delete Q1;
-    delete Q2;
-    delete Q3;
-    delete Q4;
-    delete Q5;
-
-    delete f;
-    delete g;
-    delete r;
-    delete t;
-    delete u;
-    delete v;
 
     delete m3;
 }

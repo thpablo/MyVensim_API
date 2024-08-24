@@ -2,8 +2,6 @@
 
 FlowImplementation::FlowImplementation() : name(""), source(nullptr), target(nullptr), transportValue(0.0) {}
 
-FlowImplementation::FlowImplementation(string name) : name(name), source(nullptr), target(nullptr), transportValue(0.0) {}
-
 FlowImplementation::FlowImplementation(string name, System *source, System *target) : name(name), source(source), target(target), transportValue(0.0) {}
 
 FlowImplementation::FlowImplementation(const FlowImplementation &f) : name(f.name), source(f.source), target(f.target), transportValue(f.transportValue) {}

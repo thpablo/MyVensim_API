@@ -6,13 +6,13 @@
 
 class FlowToTests : public FlowImplementation{
     public:
-    FlowToTests() : FlowImplementation() {}
-    FlowToTests(const std::string& name, System* source, System* target) : FlowImplementation(name, source, target) {}
+    FlowToTests(string name = "", System *source = nullptr, System *target = nullptr);
     double execute() override {
         return 1.0;
     }
 };
 
+FlowToTests::FlowToTests(string name, System *source, System *target) : FlowImplementation(name, source, target) {}
 
 bool UnitFlow::unit_getName()
 {

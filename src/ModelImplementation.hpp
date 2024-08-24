@@ -14,8 +14,10 @@ class ModelImplementation : public Model
 private:
     vector<Flow *> flows;
     vector<System *> systems;
+    static vector<Model *> models; // Por que temos um vetor de modelos ?
     string name;
     int currentTime;
+
 public:
     /**
      * @brief Construct a new ModelImplementation object
@@ -45,11 +47,19 @@ public:
      */
     string getName() const;
     /**
+     * @brief Get the current time in run() method
+     *
+     * @return current time in run() method
+     */
+    int getCurrentTime() const;
+
+public:
+    /**
      * @brief Add a single System to the model
      *
      * @param system System object
      */
-    int getCurrentTime() const;
+
     void add(System *system);
     /**
      * @brief Add a single System to the model
@@ -58,44 +68,44 @@ public:
      */
     void add(Flow *flow);
 
-
+public:
     /**
      * @brief Get the System begin object
-     * 
-     * @return reference to first system in collection 
+     *
+     * @return reference to first system in collection
      */
     itSystem getSystem();
 
     /**
      * @brief Get the Flow begin object
-     * 
-     * @return reference to first Flow in collection 
+     *
+     * @return reference to first Flow in collection
      */
     itFlow getFlow();
 
     /**
      * @brief Get the System object by name
-     * 
+     *
      * @return reference to first system finds by name
      */
     itSystem getSystem(string name);
     /**
      * @brief Get the flow object by name
-     * 
+     *
      * @return reference to first flow finds by name
      */
     itFlow getFlow(string name);
 
     /**
      * @brief Get the Systems size
-     * 
+     *
      * @return number of systems in model
      */
     int getSystemsSize();
 
     /**
      * @brief Get the flows size
-     * 
+     *
      * @return number of flows in model
      */
     int getFlowsSize();
@@ -112,6 +122,13 @@ public:
      *
      */
     virtual ~ModelImplementation();
+
+    /** SPRINT 5 */
+    static Model *createModel(string name = "");
+    System *createSystem(string name, double value);
+    //bool deleteModel(const string &name);
+    bool deleteSystem(const string &name);
+    bool deleteFlow(const string &name);
 };
 
 #endif // MODELIMPLEMENTATION

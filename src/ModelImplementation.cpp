@@ -1,5 +1,10 @@
 #include "./ModelImplementation.hpp"
 #include "./Model.hpp"
+
+// ModelImpl is a Factory class, because of this it includes Flow and System Implementation classes
+#include "./FlowImplementation.hpp"
+#include "./SystemImplementation.hpp"
+
 #include <iostream>
 #include <math.h>
 using namespace std;
@@ -135,4 +140,60 @@ ModelImplementation::~ModelImplementation()
 {
     systems.clear();
     flows.clear();
+}
+
+/** Fabrica gerencia objetos que ela utiliza
+ *  (cria e deleta objetos)
+ */
+
+
+Model * ModelImplementation::createModel(string name)
+{
+    Model *model = new ModelImplementation(name);
+    //models.push_back(model);
+    return model;
+}
+
+Model * Model::createModel(string name)
+{
+    Model *model = ModelImplementation::createModel(name); // Delegate to the implementation class
+    return model;
+}
+
+
+System * ModelImplementation::createSystem(string name, double value){
+    System *system = new SystemImplementation(name, value);
+    add(system);
+    return system;
+}
+
+/*
+bool ModelImplementation::deleteModel(const string &name){
+    //???
+    for(auto it = models.begin(); it != models.end(); ++it){
+        if((*it)->getName() == name){
+            delete *it;
+            return true;
+        }
+    }
+    return false;
+}*/
+
+bool ModelImplementation::deleteSystem(const string &name){
+    for(auto it = systems.begin(); it != systems.end(); ++it){
+        if((*it)->getName() == name){
+            delete *it;
+            return true;
+        }
+    }
+    return false;
+}
+bool ModelImplementation::deleteFlow(const string &name){
+    for(auto it = flows.begin(); it != flows.end(); ++it){
+        if((*it)->getName() == name){
+            delete *it;
+            return true;
+        }
+    }
+    return false;
 }
