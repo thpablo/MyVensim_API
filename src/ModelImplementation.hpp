@@ -53,6 +53,14 @@ public:
      */
     int getCurrentTime() const;
 
+    /**
+     * @brief Create a Model collection with a name
+     * 
+     * @param name name to the model
+     * @return Model* 
+     */
+    static Model *createModel(string name = "");
+
 public:
     /**
      * @brief Add a single System to the model
@@ -121,14 +129,12 @@ public:
      * @brief Destroy the ModelImplementation object
      *
      */
-    virtual ~ModelImplementation();
 
-    /** SPRINT 5 */
-    static Model *createModel(string name = "");
-    System *createSystem(string name, double value);
+    System* createSystem(string name, double value);
     //bool deleteModel(const string &name);
     bool deleteSystem(const string &name);
     bool deleteFlow(const string &name);
+    virtual ~ModelImplementation();
 };
 
 #endif // MODELIMPLEMENTATION

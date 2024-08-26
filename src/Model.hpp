@@ -14,6 +14,7 @@ class Model
 public:
     typedef typename vector<System *>::iterator itSystem;
     typedef typename vector<Flow *>::iterator itFlow;
+
     /**
      * @brief Set the Name of model
      *
@@ -84,33 +85,62 @@ public:
      *
      */
     friend class UnitModel;
-    /**
-     * @brief Destroy the Model object
-     *
-     */
-    virtual ~Model() {};
 
-    /***Sprint 5*/
-    static Model * createModel(string name); // Model is a static object Model::createModel("name");
-    
+    /**
+     * @brief Create a Model and put it in a model collection
+     * 
+     * @param name name to the model
+     * @return a single Model object
+     */
+    static Model * createModel(string name);    
+    /**
+     * @brief Create a System and put it in a system collection
+     * 
+     * @param name name to the system
+     * @param value value to accumulator of system
+     * @return a single System object
+     */
     virtual System* createSystem(string name, double value) = 0;
 
-    // Implemented type derived from the Flow class
-    template <typename FLOW_DERIVED_TYPE>
+    // Template to child classes from Flow
+    template <typename FLOW_DERIVED_CLASS>
     Flow * createFlow(string name, System *source, System *target)
     {
-        Flow *flow = new FLOW_DERIVED_TYPE(name, source, target);
+        Flow *flow = new FLOW_DERIVED_CLASS(name, source, target);
         add(flow);
         return flow;
     } //Porque implementacao no Model.h?
     
+    /* ---------- Nao funciona ----------- */
+    // Funcao para delegar a add para modelIMplementation (nao funciona)
     virtual void add(Flow *flow) = 0;
-
+    // Funcao para deletar vetores de modelo (Problema em utilizar vetor de modelos)
     //virtual bool deleteModel(const string &name) = 0;
+    /*------------------------------------ */
     
+    /**
+     * @brief Delete a system by name in system colections
+     * 
+     * @param name name to find the system and delete
+     * @return true case the system was deleted
+     * @return false case the system was not deleted (not find)
+     */
     virtual bool deleteSystem(const string &name) = 0;
+
+    /**
+     * @brief Delete a flow by name in flow colections
+     * 
+     * @param name name to find the flow and delete
+     * @return true case the flow was deleted
+     * @return false case the flow was not deleted (not find)
+     */
     virtual bool deleteFlow(const string &name) = 0;
 
+    /**
+     * @brief Destroy the Model object
+     * 
+     */
+    virtual ~Model() {};
 };
 
 #endif // MODEL_H

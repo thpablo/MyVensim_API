@@ -10,7 +10,9 @@ void exponentialFuncionalTest()
     System *target = m1->createSystem("POP 2", 0);
 
     // Add systems and flows
-    Flow *flow1 = m1->createFlow<Exponential>("flow1", source, target);
+    Flow *flow1 = m1->createFlow<Exponential>("flow1", nullptr, nullptr);
+    flow1->setSource(source);
+    flow1->setTarget(target);
 
     // Execution
     m1->run(0, 100);
@@ -28,7 +30,10 @@ void logisticalFuncionalTest()
     System *source = m2->createSystem("p1", 100);
     System *target = m2->createSystem("p2", 10);
 
-    Flow *flow2 = m2->createFlow<Logistic>("flow2", source, target);
+    Flow *flow2 = m2->createFlow<Logistic>("flow2", nullptr, nullptr);
+
+    flow2->setSource(source);
+    flow2->setTarget(target);
 
     m2->run(0, 100);
 
@@ -36,7 +41,6 @@ void logisticalFuncionalTest()
     assert(fabs(round((target->getAccumulatorValue() * 10000) - (21.7833 * 10000))) < 1);
     
     delete m2;
-
 }
 
 void complexFuncionalTest()
@@ -49,12 +53,19 @@ void complexFuncionalTest()
     System *Q4 = m3->createSystem("Q4", 0);
     System *Q5 = m3->createSystem("Q5", 0);
 
-    Flow *f = m3->createFlow<Complex>("F", Q1, Q2);
-    Flow *g = m3->createFlow<Complex>("G", Q1, Q3);
-    Flow *r = m3->createFlow<Complex>("R", Q2, Q5);
-    Flow *t = m3->createFlow<Complex>("T", Q2, Q3);
-    Flow *u = m3->createFlow<Complex>("U", Q3, Q4);
-    Flow *v = m3->createFlow<Complex>("V", Q4, Q1);
+    Flow *f = m3->createFlow<Complex>("F", nullptr, nullptr);
+    Flow *g = m3->createFlow<Complex>("G", nullptr, nullptr);
+    Flow *r = m3->createFlow<Complex>("R", nullptr, nullptr);
+    Flow *t = m3->createFlow<Complex>("T", nullptr, nullptr);
+    Flow *u = m3->createFlow<Complex>("U", nullptr, nullptr);
+    Flow *v = m3->createFlow<Complex>("V", nullptr, nullptr);
+
+    f->setSource(Q1); f->setTarget(Q2);
+    g->setSource(Q1); g->setTarget(Q3);
+    r->setSource(Q2); r->setTarget(Q5);
+    t->setSource(Q2); t->setTarget(Q3);
+    u->setSource(Q3); u->setTarget(Q4);
+    v->setSource(Q4); v->setTarget(Q1);
 
     m3->run(0, 100);
 

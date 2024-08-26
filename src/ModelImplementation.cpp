@@ -136,12 +136,6 @@ void ModelImplementation::run(int initialTime, int finalTime)
     }
 }
 
-ModelImplementation::~ModelImplementation()
-{
-    systems.clear();
-    flows.clear();
-}
-
 /** Fabrica gerencia objetos que ela utiliza
  *  (cria e deleta objetos)
  */
@@ -197,3 +191,5 @@ bool ModelImplementation::deleteFlow(const string &name){
     }
     return false;
 }
+
+ModelImplementation::~ModelImplementation() { }
