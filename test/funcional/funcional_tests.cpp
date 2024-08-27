@@ -1,9 +1,12 @@
 #include "./funcional_tests.hpp"
 
+#include <iostream>
+using namespace std;
+
 void exponentialFuncionalTest()
 {
     // Create the model
-    Model* m1 = Model::createModel("Model 1");
+    Model* m1 = Model::createModel("Model 1",0);
 
     // Add systems
     System *source = m1->createSystem("POP 1", 100);
@@ -20,7 +23,7 @@ void exponentialFuncionalTest()
     // Check the values
     assert(fabs(round((source->getAccumulatorValue() * 10000) - (36.6032 * 10000))) < 1);
     assert(fabs(round((target->getAccumulatorValue() * 10000) - (63.3968 * 10000))) < 1);
-
+    
     delete m1;
 }
 void logisticalFuncionalTest()

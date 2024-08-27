@@ -14,11 +14,13 @@ class ModelImplementation : public Model
 private:
     vector<Flow *> flows;
     vector<System *> systems;
-    static vector<Model *> models; // Por que temos um vetor de modelos ?
     string name;
     int currentTime;
+    static ModelImplementation * model;
 
 public:
+    static ModelImplementation *createModel(string name, int currentTime);
+private:
     /**
      * @brief Construct a new ModelImplementation object
      *
@@ -29,9 +31,7 @@ public:
      *
      * @param name name to the model
      */
-    ModelImplementation(string name);
-
-protected:
+    ModelImplementation(string name, int currentTime);
     ModelImplementation(const ModelImplementation &m);
     ModelImplementation &operator=(const ModelImplementation &m);
 
@@ -131,7 +131,6 @@ public:
      */
 
     System* createSystem(string name, double value);
-    //bool deleteModel(const string &name);
     bool deleteSystem(const string &name);
     bool deleteFlow(const string &name);
     virtual ~ModelImplementation();

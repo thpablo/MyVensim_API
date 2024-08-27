@@ -9,9 +9,11 @@
 #include <math.h>
 using namespace std;
 
-ModelImplementation::ModelImplementation() : name("") {}
+ModelImplementation* ModelImplementation::model = nullptr;
 
-ModelImplementation::ModelImplementation(string name) : name(name) {}
+ModelImplementation::ModelImplementation() : name(""), currentTime(0) {}
+
+ModelImplementation::ModelImplementation(string name, int currentTime) : name(name), currentTime(currentTime) {}
 
 // Copy constructor
 ModelImplementation::ModelImplementation(const ModelImplementation &m) : name(m.name)
@@ -73,6 +75,7 @@ void ModelImplementation::add(Flow *flow)
 {
     flows.push_back(flow);
 }
+
 Model::itSystem ModelImplementation::getSystem()
 {
     return systems.begin();
@@ -136,42 +139,23 @@ void ModelImplementation::run(int initialTime, int finalTime)
     }
 }
 
-/** Fabrica gerencia objetos que ela utiliza
- *  (cria e deleta objetos)
- */
 
-
-Model * ModelImplementation::createModel(string name)
+ModelImplementation * ModelImplementation::createModel(string name = "", int currentTime = 0)
 {
-    Model *model = new ModelImplementation(name);
-    //models.push_back(model);
+    if(model == NULL)
+        model = new ModelImplementation(name, currentTime);
     return model;
 }
 
-Model * Model::createModel(string name)
-{
-    Model *model = ModelImplementation::createModel(name); // Delegate to the implementation class
-    return model;
+Model * Model::createModel(string name, int currentTime){
+    return ModelImplementation::createModel(name, currentTime);
 }
-
 
 System * ModelImplementation::createSystem(string name, double value){
     System *system = new SystemImplementation(name, value);
     add(system);
     return system;
 }
-
-/*
-bool ModelImplementation::deleteModel(const string &name){
-    //???
-    for(auto it = models.begin(); it != models.end(); ++it){
-        if((*it)->getName() == name){
-            delete *it;
-            return true;
-        }
-    }
-    return false;
-}*/
 
 bool ModelImplementation::deleteSystem(const string &name){
     for(auto it = systems.begin(); it != systems.end(); ++it){
@@ -192,4 +176,15 @@ bool ModelImplementation::deleteFlow(const string &name){
     return false;
 }
 
-ModelImplementation::~ModelImplementation() { }
+ModelImplementation::~ModelImplementation() { 
+    for(itSystem it = systems.begin(); it != systems.end(); ++it){
+        delete *it;
+    }
+    systems.clear();
+
+    for(itFlow it = flows.begin(); it != flows.end(); ++it){
+        delete *it;
+    }
+    flows.clear();
+    model = nullptr;
+}

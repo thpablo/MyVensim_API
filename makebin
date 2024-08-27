@@ -1,0 +1,19 @@
+all: unit_tests funcional_tests
+
+unit_tests: src/main.o test/unit/unit_test.o
+	g++ -o unit_tests src/main.o test/unit/unit_test.o
+
+funcional_tests: src/main.o test/funcional/func_test.o
+	g++ -o funcional_tests src/main.o test/funcional/func_test.o
+
+src/main.o: src/main.cpp
+	g++ -c src/main.cpp -o src/main.o
+
+test/unit/unit_test.o: test/unit/unit_test.cpp
+	g++ -c test/unit/unit_test.cpp -o test/unit/unit_test.o
+
+test/funcional/func_test.o: test/funcional/func_test.cpp
+	g++ -c test/funcional/func_test.cpp -o test/funcional/func_test.o
+
+clean:
+	rm -f src/*.o test/unit/*.o test/funcional/*.o unit_tests funcional_tests

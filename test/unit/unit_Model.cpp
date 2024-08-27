@@ -49,10 +49,9 @@ bool UnitModel::unit_setName()
 bool UnitModel::unit_addSystem()
 {
     Model *model = Model::createModel("");
-    System *s = model->createSystem("", 0);
+    model->createSystem("", 0);
     assert(model->getSystemsSize() == 1);
 
-    delete s;
     delete model;
     return true;
 }
@@ -61,10 +60,9 @@ bool UnitModel::unit_addFlow()
     Model *m = Model::createModel("");
     System * s1 = m->createSystem("System1", 0);
     System * s2 = m->createSystem("System2", 0);
-    Flow *f = m->createFlow<FlowToTest>("Flow1", s1, s2);
+    m->createFlow<FlowToTest>("Flow1", s1, s2);
     assert(m->getFlowsSize() == 1);
 
-    delete f;
     delete m;
     return true;
 }
@@ -72,14 +70,12 @@ bool UnitModel::unit_run(){
     int initialTime = 0;
     int finalTime = 10;
     Model *m = Model::createModel("");
-    System *s = m->createSystem("System1", 0);
-    Flow *f = m->createFlow<FlowToTest>("Flow1", s, s);
+    System * s = m->createSystem("System1", 0);
+    m->createFlow<FlowToTest>("Flow1", s, s);
 
     m->run(initialTime, finalTime);
     assert(m->getCurrentTime() == (finalTime - 1));
     
-    delete s;
-    delete f;
     delete m;
     return true;
 }
@@ -92,46 +88,42 @@ bool UnitModel::unit_getCurrentTime(){
 
 bool UnitModel::unit_getSystems() {
     Model * model = Model::createModel("TestModel");
-    System * s = model->createSystem("System1",0);
+    model->createSystem("System1",0);
 
     auto it = model->getSystem("System1");
     assert((*it)->getName() == "System1");
 
-    delete s;
     delete model;
     return true;
 }
-
 bool UnitModel::unit_getFlows() {
     Model * model = Model::createModel("TestModel");
-    Flow * f = model->createFlow<FlowToTest>("", nullptr, nullptr);
-    f->setName("Flow1");
-
+    model->createFlow<FlowToTest>("Flow1", nullptr, nullptr);
     auto it = model->getFlow("Flow1");
     assert((*it)->getName() == "Flow1");
-
-    delete f;
     delete model;
     return true;
 }
 bool UnitModel::unit_getSystemsSize(){
     Model *model = Model::createModel("");
-    System *s = model->createSystem("", 0);
+    model->createSystem("", 0);
     assert(model->getSystemsSize() == 1);
-    delete s;
+
     delete model;
     return true;
 }
 bool UnitModel::unit_getFlowsSize(){
     Model *m = Model::createModel("");
-    Flow *f = m->createFlow<FlowToTest>("Flow1", nullptr, nullptr);
+    m->createFlow<FlowToTest>("Flow1", nullptr, nullptr);
     assert(m->getFlowsSize() == 1);
-    delete f;
     delete m;
     return true;
 }
 
 bool UnitModel::unit_Model_destructor(){ return true; }
+
+#include <iostream>
+using namespace std;
 
 void UnitModel::run_unit_tests_Model()
 {
@@ -145,7 +137,7 @@ void UnitModel::run_unit_tests_Model()
     assert(unit.unit_getSystems());
     assert(unit.unit_getFlows());
     assert(unit.unit_getSystemsSize());
-    assert(unit.unit_getFlowsSize());
-    assert(unit.unit_run());
+    assert(unit.unit_getFlowsSize());;
+    assert(unit.unit_run());;
     assert(unit.unit_Model_destructor());
 }

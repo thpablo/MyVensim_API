@@ -14,7 +14,6 @@ class Model
 public:
     typedef typename vector<System *>::iterator itSystem;
     typedef typename vector<Flow *>::iterator itFlow;
-
     /**
      * @brief Set the Name of model
      *
@@ -92,7 +91,7 @@ public:
      * @param name name to the model
      * @return a single Model object
      */
-    static Model * createModel(string name);    
+    static Model * createModel(string name = "", int currentTime = 0);    
     /**
      * @brief Create a System and put it in a system collection
      * 
@@ -110,14 +109,8 @@ public:
         add(flow);
         return flow;
     } //Porque implementacao no Model.h?
-    
-    /* ---------- Nao funciona ----------- */
-    // Funcao para delegar a add para modelIMplementation (nao funciona)
+
     virtual void add(Flow *flow) = 0;
-    // Funcao para deletar vetores de modelo (Problema em utilizar vetor de modelos)
-    //virtual bool deleteModel(const string &name) = 0;
-    /*------------------------------------ */
-    
     /**
      * @brief Delete a system by name in system colections
      * 
