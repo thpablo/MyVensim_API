@@ -130,6 +130,14 @@ public:
     virtual bool deleteFlow(const string &name) = 0;
 
     /**
+     * @brief Delete a model
+     * 
+     * @return true case the model was deleted
+     * @return false case the model was not deleted (not find)
+     */
+    static bool deleteModel();
+
+    /**
      * @brief Destroy the Model object
      * 
      */

@@ -126,13 +126,43 @@ public:
     void run(int initialTime, int finalTime);
 
     /**
-     * @brief Destroy the ModelImplementation object
-     *
+     * @brief Create a system in model
+     * 
+     * @param name name to system
+     * @param value initial value to accumulator
+     * @return object system created
      */
-
     System* createSystem(string name, double value);
+
+    /**
+     * @brief Delete a system by name in system colections
+     * 
+     * @param name name to find the system and delete
+     * @return true case the system was deleted
+     * @return false case the system was not deleted (not find)
+     */
     bool deleteSystem(const string &name);
+    /**
+     * @brief Delete a flow by name in flow colections
+     * 
+     * @param name name to find the flow and delete
+     * @return true case the flow was deleted
+     * @return false case the flow was not deleted (not find)
+     */
     bool deleteFlow(const string &name);
+
+    /**
+     * @brief Delete instance of model
+     * 
+     * @return true case the model was deleted
+     * @return false case the model was not deleted (not find)
+     */
+    static bool deleteModel();
+
+    /**
+     * @brief Destroy the Model Implementation object and clear the collections
+     * 
+     */
     virtual ~ModelImplementation();
 };
 

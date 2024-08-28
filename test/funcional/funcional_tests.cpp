@@ -1,8 +1,5 @@
 #include "./funcional_tests.hpp"
 
-#include <iostream>
-using namespace std;
-
 void exponentialFuncionalTest()
 {
     // Create the model
@@ -24,7 +21,7 @@ void exponentialFuncionalTest()
     assert(fabs(round((source->getAccumulatorValue() * 10000) - (36.6032 * 10000))) < 1);
     assert(fabs(round((target->getAccumulatorValue() * 10000) - (63.3968 * 10000))) < 1);
     
-    delete m1;
+    Model::deleteModel();
 }
 void logisticalFuncionalTest()
 {
@@ -43,7 +40,7 @@ void logisticalFuncionalTest()
     assert(fabs(round((source->getAccumulatorValue() * 10000) - (88.2167 * 10000))) < 1);
     assert(fabs(round((target->getAccumulatorValue() * 10000) - (21.7833 * 10000))) < 1);
     
-    delete m2;
+    Model::deleteModel();
 }
 
 void complexFuncionalTest()
@@ -79,5 +76,5 @@ void complexFuncionalTest()
     assert(fabs(round((Q4->getAccumulatorValue() * 10000) - (56.1728 * 10000))) < 1);
     assert(fabs(round((Q5->getAccumulatorValue() * 10000) - (16.4612 * 10000))) < 1);
 
-    delete m3;
+    Model::deleteModel();
 }

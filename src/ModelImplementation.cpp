@@ -186,5 +186,18 @@ ModelImplementation::~ModelImplementation() {
         delete *it;
     }
     flows.clear();
+
     model = nullptr;
+}
+
+bool Model::deleteModel(){
+    return ModelImplementation::deleteModel();
+}
+
+bool ModelImplementation::deleteModel(){
+    if(model != nullptr){
+        delete model;
+        return true;
+    }
+    return false;
 }
