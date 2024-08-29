@@ -5,9 +5,7 @@
 #include "./FlowImplementation.hpp"
 #include "./SystemImplementation.hpp"
 
-#include <iostream>
 #include <math.h>
-using namespace std;
 
 ModelImplementation* ModelImplementation::model = nullptr;
 
