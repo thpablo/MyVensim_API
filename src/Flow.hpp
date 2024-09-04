@@ -21,7 +21,7 @@ public:
      * 
      * @return name of the Flow
      */
-    virtual string getName() const = 0;
+    virtual string getName() = 0;
     /**
      * @brief Set the System object that represents the source of the flux
      * 
@@ -40,13 +40,13 @@ public:
      * 
      * @return the source system object reference
      */
-    virtual System *getSource() const = 0;
+    virtual System *getSource() = 0;
     /**
      * @brief Get the Target System object reference
      * 
      * @return the target system object reference
      */
-    virtual System *getTarget() const = 0;
+    virtual System *getTarget() = 0;
 
     /**
      * @brief Set the Transport Value object
@@ -59,7 +59,7 @@ public:
      * 
      * @return the value of the transport
      */
-    virtual double getTransportValue() const = 0;
+    virtual double getTransportValue() = 0;
 
     /**
      * @brief Abstract method that represents the equation of the Flow
@@ -73,13 +73,6 @@ public:
      * 
      */
     friend class UnitFlow;
-
-    /**
-     * @brief Overload of the assignment operator
-     * 
-     * @return a copy of the flow object
-     */
-    virtual Flow &operator=(const Flow &f) = 0;
     /**
      * @brief Destroy the Flow object
      * 

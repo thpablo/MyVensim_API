@@ -1,6 +1,6 @@
 #include "Logistic.hpp"
 
-Logistic::Logistic(string name, System *source, System *target) : FlowImplementation(name, source, target) {}
+Logistic::Logistic(string name, System *source, System *target) : FlowHandle(name, source, target) {}
 double Logistic::execute()
 {
     return 0.01 * getTarget()->getAccumulatorValue() * (1 - (getTarget()->getAccumulatorValue()) / 70);

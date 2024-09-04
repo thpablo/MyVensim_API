@@ -1,18 +1,18 @@
 #include "unit_Model.hpp"
 #include "../../src/Model.hpp"
-#include "../../src/ModelImplementation.hpp"
+#include "../../src/ModelBody.hpp"
 #include "../../src/Flow.hpp"
-#include "../../src/FlowImplementation.hpp"
-#include "unit_Flow.hpp" // To use FlowUnitImplementation
+#include "../../src/FlowBody.hpp"
+#include "unit_Flow.hpp" // To use FlowBody
 #include "../../src/System.hpp"
-#include "../../src/SystemImplementation.hpp"
+#include "../../src/SystemBody.hpp"
 #include <assert.h>
 
 // This is a test class for the flow unit tests
-class FlowToTest : public FlowImplementation
+class FlowToTest : public FlowHandle
 {
 public:
-    FlowToTest(string name = "", System *source = nullptr, System *target = nullptr) : FlowImplementation(name, source, target) {}
+    FlowToTest(string name = "", System *source = nullptr, System *target = nullptr) : FlowHandle(name, source, target) {}
     double execute() override{
         return 1.0;
     }

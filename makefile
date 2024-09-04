@@ -1,16 +1,16 @@
 all: libimpl.so funcional_tests unit_tests
 
-libimpl.so: bin/ModelImplementation.o bin/SystemImplementation.o bin/FlowImplementation.o
-	g++ -shared -o bin/libimpl.so bin/ModelImplementation.o bin/SystemImplementation.o bin/FlowImplementation.o
+libimpl.so: bin/ModelBody.o bin/SystemBody.o bin/FlowBody.o
+	g++ -shared -o bin/libimpl.so bin/ModelBody.o bin/SystemBody.o bin/FlowBody.o
 
-bin/ModelImplementation.o: src/ModelImplementation.cpp
-	g++ -c -fPIC src/ModelImplementation.cpp -o bin/ModelImplementation.o
+bin/ModelBody.o: src/ModelBody.cpp
+	g++ -c -fPIC src/ModelBody.cpp -o bin/ModelBody.o
 
-bin/SystemImplementation.o: src/SystemImplementation.cpp
-	g++ -c -fPIC src/SystemImplementation.cpp -o bin/SystemImplementation.o
+bin/SystemBody.o: src/SystemBody.cpp
+	g++ -c -fPIC src/SystemBody.cpp -o bin/SystemBody.o
 
-bin/FlowImplementation.o: src/FlowImplementation.cpp
-	g++ -c -fPIC src/FlowImplementation.cpp -o bin/FlowImplementation.o
+bin/FlowBody.o: src/FlowBody.cpp
+	g++ -c -fPIC src/FlowBody.cpp -o bin/FlowBody.o
 
 funcional_tests: libimpl.so
 	g++ test/funcional/*.cpp -Lbin -limpl -o bin/funcional.o

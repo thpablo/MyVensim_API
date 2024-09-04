@@ -108,7 +108,7 @@ public:
         Flow *flow = new FLOW_DERIVED_CLASS(name, source, target);
         add(flow);
         return flow;
-    } //Porque implementacao no Model.h?
+    } 
 
     virtual void add(Flow *flow) = 0;
     /**

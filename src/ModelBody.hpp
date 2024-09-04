@@ -1,5 +1,5 @@
-#ifndef MODELIMPLEMENTATION_H
-#define MODELIMPLEMENTATION_H
+#ifndef ModelBody_H
+#define ModelBody_H
 
 #include "./Flow.hpp"
 #include "./System.hpp"
@@ -7,33 +7,33 @@
 #include <vector>
 using namespace std;
 /**
- * @brief Class ModelImplementation represents the model with different systems and flows
+ * @brief Class ModelBody represents the model with different systems and flows
  */
-class ModelImplementation : public Model
+class ModelBody : public Model
 {
 private:
     vector<Flow *> flows;
     vector<System *> systems;
     string name;
     int currentTime;
-    static ModelImplementation * model;
+    static ModelBody * model;
 
 public:
-    static ModelImplementation *createModel(string name, int currentTime);
+    static ModelBody *createModel(string name, int currentTime);
 private:
     /**
-     * @brief Construct a new ModelImplementation object
+     * @brief Construct a new ModelBody object
      *
      */
-    ModelImplementation();
+    ModelBody();
     /**
-     * @brief Construct a new ModelImplementation object with a name
+     * @brief Construct a new ModelBody object with a name
      *
      * @param name name to the model
      */
-    ModelImplementation(string name, int currentTime);
-    ModelImplementation(const ModelImplementation &m);
-    ModelImplementation &operator=(const ModelImplementation &m);
+    ModelBody(string name, int currentTime);
+    ModelBody(const ModelBody &m);
+    ModelBody &operator=(const ModelBody &m);
 
 public:
     /**
@@ -163,7 +163,7 @@ public:
      * @brief Destroy the Model Implementation object and clear the collections
      * 
      */
-    virtual ~ModelImplementation();
+    virtual ~ModelBody();
 };
 
-#endif // MODELIMPLEMENTATION
+#endif // ModelBody

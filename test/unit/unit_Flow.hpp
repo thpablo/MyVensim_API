@@ -2,7 +2,7 @@
 #define UNITFLOW_HPP
 
 #include "../../src/Flow.hpp"
-#include "../../src/FlowImplementation.hpp"
+#include "../../src/FlowBody.hpp"
 
 class UnitFlow
 {

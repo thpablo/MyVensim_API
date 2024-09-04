@@ -22,7 +22,7 @@ public:
     *
     * @return string
     */
-   virtual string getName() const = 0;
+   virtual string getName() = 0;
    /**
     * @brief Set the Accumulator Value object
     *
@@ -34,14 +34,7 @@ public:
     *
     * @return value of the accumulator
     */
-   virtual double getAccumulatorValue() const = 0;
-   /**
-    * @brief Overload of the assignment operator
-    * 
-    * @param s system object
-    * @return The system object copy
-    */
-   virtual System &operator=(const System &s) = 0;
+   virtual double getAccumulatorValue() = 0;
    /**
     * @brief Friend class to unit tests
     * 

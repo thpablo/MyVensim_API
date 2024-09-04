@@ -1,22 +1,22 @@
 #include "unit_Flow.hpp"
 #include "../../src/Flow.hpp"
 #include "../../src/System.hpp"
-#include "../../src/SystemImplementation.hpp"
+#include "../../src/SystemBody.hpp"
 #include <assert.h>
 
-class FlowToTests : public FlowImplementation{
+class FlowToTests : public FlowHandle{
     public:
-    FlowToTests(string name = "", System *source = nullptr, System *target = nullptr);
+    FlowToTests(string name = "", System * source = nullptr, System * target = nullptr);
     double execute() override {
         return 1.0;
     }
 };
 
-FlowToTests::FlowToTests(string name, System *source, System *target) : FlowImplementation(name, source, target) {}
+FlowToTests::FlowToTests(string name, System * source, System * target) : FlowHandle(name, source, target) {}
 
 bool UnitFlow::unit_getName()
 {
-    System * s = new SystemImplementation("System");
+    System *  s = new SystemHandle("System");
     Flow * f = new FlowToTests("Flow 1", s, s);
     assert(f->getName() == "Flow 1");
 
@@ -38,7 +38,7 @@ bool UnitFlow::unit_setName()
 
 bool UnitFlow::unit_setSource()
 {
-    System * s = new SystemImplementation();
+    System * s = new SystemHandle();
     Flow * f = new FlowToTests("Flow 1", nullptr, nullptr);
     f->setSource(s);
     assert(f->getSource() == s);
@@ -50,7 +50,7 @@ bool UnitFlow::unit_setSource()
 
 bool UnitFlow::unit_setTarget()
 {
-    System * s = new SystemImplementation();
+    System *  s = new SystemHandle();
     Flow * f = new FlowToTests("Flow 1", nullptr, nullptr);
     f->setTarget(s);
     assert(f->getTarget() == s);
@@ -62,7 +62,7 @@ bool UnitFlow::unit_setTarget()
 
 bool UnitFlow::unit_getSource()
 {
-    System * s = new SystemImplementation();
+    System *  s = new SystemHandle();
     Flow * f = new FlowToTests("Flow 1", s, nullptr);
     assert(f->getSource() == s);
 
@@ -73,7 +73,7 @@ bool UnitFlow::unit_getSource()
 
 bool UnitFlow::unit_getTarget()
 {
-    System * s = new SystemImplementation();
+    System *  s = new SystemHandle();
     Flow * f = new FlowToTests("Flow 1", nullptr, s);
     assert(f->getTarget() == s);
 
@@ -102,19 +102,22 @@ bool UnitFlow::unit_getTransportValue()
     return true;
 }
 
+#include <iostream>
+using namespace std;
 bool UnitFlow::unit_operatorAssignament()
 {
-    System * s = new SystemImplementation();
-    Flow * f1 = new FlowToTests("Flow 1", s, s);
-    Flow * f2 = new FlowToTests("Flow 2", nullptr, nullptr);
-    *f2 = *f1;
-    assert(f2->getName() == "Flow 1");
-    assert(f2->getSource() == s);
-    assert(f2->getTarget() == s);
-    assert(f2->getTransportValue() == 0.0);
+    System *  s = new SystemHandle();
+    FlowToTests f1;
+    f1.setName("Flow 1");
+    f1.setSource(s);
+    f1.setTarget(s);
+    FlowToTests f2;
+    f2 = f1;
+    assert(f2.getName() == "Flow 1");
+    assert(f2.getSource() == s);
+    assert(f2.getTarget() == s);
+    assert(f2.getTransportValue() == 0.0);
 
-    delete f1;
-    delete f2;
     delete s;
     return true;
 }
